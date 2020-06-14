@@ -24,6 +24,8 @@ class Cart extends Component
     public $distric;
     public $address;
 
+    public $current_global_stock_variable;
+
 
 
 
@@ -118,7 +120,14 @@ class Cart extends Component
         if (!isset($cart[$product])) {
             $cart[$product] = Product::find($product);
         }
-        if ($quentity > $cart[$product]->stock->stock) {
+        if ($cart[$product]['variation_details'] !== null) {
+            $this->current_global_stock_variable = $cart[$product]['variation_details']->stock;
+            // dd($this->current_global_stock_variable);
+        } else {
+            $this->current_global_stock_variable = $cart[$product]->stock->stock;
+        }
+        // dd($cart[$product]['variation_details']);
+        if ($quentity > $this->current_global_stock_variable) {
             $this->emit(
                 'overUpdateCartQuentity',
                 ['type' => 'error', 'message' => '<h5> You Have select OverQuentity </h5>']
@@ -127,7 +136,7 @@ class Cart extends Component
             return false;
         }
 
-        if ($cart[$product]->stock->stock <=  $cart[$product]['quentity']) {
+        if ($this->current_global_stock_variable <=  $cart[$product]['quentity']) {
 
 
             return  $this->recalculate($cart, $product, $quentity);
@@ -175,6 +184,9 @@ class Cart extends Component
 
     public function confirmOrder($payment)
     {
+
+        dd(session()->get('current'));
+
 
 
         $currentUser =  Auth()->user()->id;

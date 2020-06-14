@@ -80,7 +80,7 @@
 
                                                 <div class="product-details-quantity">
                                                     <input type="number" id="quentity{{ $product->id }}"
-                                                        class="form-control" value="1" min="1" max="10" step="1"
+                                                        class="form-control" value="1" min="1" max="100" step="1"
                                                         data-decimals="0" required>
                                                 </div><!-- End .product-details-quantity -->
 
@@ -211,8 +211,10 @@
                                     </div><!-- End .product-action-vertical -->
 
                                     <div class="product-action">
-                                        <button wire:click="$emit('addFromSameType',{{ $data->id }})"
-                                            class="btn-product btn-cart"><span>add to cart</span></button>
+                                        <p wire:click="$emit('addFromSameType',{{ $data->id }})"
+                                            class="btn-product product addToCart-pointer btn-cart"><span>add to cart</span></p>
+
+                                             
                                     </div><!-- End .product-action -->
                                 </figure><!-- End .product-media -->
 

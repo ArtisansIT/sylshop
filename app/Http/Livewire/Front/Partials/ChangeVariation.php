@@ -10,13 +10,13 @@ class ChangeVariation extends Component
 {
     public $product;
     public $variation_id;
-    public $productBasePrice;
+    // public $productBasePrice;
     public $productVariation;
 
 
     public function mount($product)
     {
-        $this->productBasePrice = true;
+        // $this->productBasePrice = true;
 
         $this->product = $product;
     }

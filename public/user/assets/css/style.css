@@ -35,6 +35,8 @@ p {
     margin-bottom: 1.5rem
 }
 
+
+
 ul,
 ol {
     list-style: none;
@@ -20198,4 +20200,8 @@ button:focus {
 
 .intro-slider.owl-simple .owl-nav [class*='owl-'] {
     font-size: 2.6rem
+}
+
+.addToCart-pointer {
+    cursor: pointer;
 }

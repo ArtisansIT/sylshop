@@ -67,4 +67,6 @@ Route::layout('layouts.app')->as('front.')->group(function () {
     });
     Route::livewire('/shop', 'front.pages.shop-list')->name('shop');
     Route::livewire('/shop/{shop}-{slug}', 'front.pages.single-shop')->name('single.shop');
+    Route::livewire('/subcategory', 'front.pages.subcategory-list')->name('subcategory');
+    Route::livewire('/subcategory/{subcategory}-{slug}', 'front.pages.single-subcategory')->name('single.subcategory');
 });

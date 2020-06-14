@@ -40,8 +40,8 @@
                     <div class="row">
 
                         @foreach ($categorys->products as $product)
-                        <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                            <div class="product">
+                        <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                            <div class="product product-5 text-center">
                                 <figure class="product-media">
                                     <span class="product-label label-sale">Sale</span>
                                     <a href="{{ route('front.product',[$product->id , $product->slug]) }}">
@@ -50,14 +50,14 @@
                                     </a>
 
                                     <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to
+                                        <a href="#" class="btn-product-icon btn-wishlist "><span>add to
                                                 wishlist</span></a>
                                     </div><!-- End .product-action -->
 
                                     <div class="product-action action-icon-top">
-                                        <button href="#"
+                                        <p href="#"
                                         wire:click="$emit('addProduct' , {{ $product->id }})"
-                                        class="btn-product btn-cart"><span>add to cart</span></button>
+                                        class="btn-product addToCart-pointer btn-cart"><span>add to cart</span></p>
                                         
                                         {{-- <a href="popup/quickView.html" class="btn-product btn-quickview"
                                             title="Quick view"><span>quick view</span></a>
@@ -92,7 +92,7 @@
                                         </div><!-- End .ratings -->
                                         <span class="ratings-text">( 2 Reviews )</span>
                                     </div><!-- End .rating-container -->
-                                     <div class="product-details-quantity">
+                                     <div class="product-action">
                                                     <input type="number" id="quentity{{ $product->id }}"
                                                         class="form-control" value="1" min="1" max="10" step="1"
                                                         data-decimals="0" required>

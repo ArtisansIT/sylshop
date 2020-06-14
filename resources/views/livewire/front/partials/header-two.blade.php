@@ -86,7 +86,7 @@
                                                         <ul>
                                                             @foreach ($category->shop as $shop)
 
-                                                            <li><a href="category-list.html">{{ $shop->name }}</a></li>
+                                                            <li><a href="{{ route('front.single.shop',[$shop->id , $shop->slug]) }}">{{ $shop->name }}</a></li>
                                                             @endforeach
 
                                                         </ul>
@@ -132,8 +132,8 @@
                                                         <ul>
                                                             @foreach ($shop->subcategorys as $subcategory)
 
-                                                            <li><a
-                                                                    href="category-list.html">{{ $subcategory->name }}</a>
+                                                            <li>
+                                                                <a href="{{ route('front.single.subcategory',[$subcategory->id,$subcategory->slug]) }}">{{ $subcategory->name }}</a>
                                                             </li>
                                                             @endforeach
 

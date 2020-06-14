@@ -37,7 +37,7 @@
          <label for="size">Variation:</label>
          <div class="select-custom">
              <select wire:model="variation_id" wire:change="changeVariation"  class="form-control">
-                 <option value=""> select</option>
+                 <option  value=""> Main Product</option>
                  @foreach ($product->variations as $variation)
 
                  <option value="{{ $variation->id }}">{{ $variation->name }}</option>

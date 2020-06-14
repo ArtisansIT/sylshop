@@ -2,6 +2,7 @@
 
 namespace App\Admin;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -25,6 +26,16 @@ class Subcategory extends Model
     public function shop()
     {
         return $this->belongsTo(Shop::class);
+    }
+
+    public function getSlugAttribute()
+    {
+        return Str::slug(
+            $this->category->name . ' ' .
+                $this->shop->name . ' ' .
+                $this->name,
+            '-'
+        );
     }
 
     public function products()

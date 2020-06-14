@@ -113,9 +113,9 @@
                                     </div><!-- End .product-action -->
 
                                     <div class="product-action action-icon-top">
-                                        <button href="#"
+                                        <p href="#"
                                         wire:click="$emit('addProduct' , {{ $product->id }})"
-                                        class="btn-product btn-cart"><span>add to cart</span></button>
+                                        class="btn-product addToCart-pointer btn-cart"><span>add to cart</span></p>
                                         
                                         {{-- <a href="popup/quickView.html" class="btn-product btn-quickview"
                                             title="Quick view"><span>quick view</span></a>
@@ -139,8 +139,8 @@
 
                                         @else
 
-                                        <span class="new-price">TK{{ $product->main_price }}</span>
-                                        <span class="old-price">Was TK{{ $product->offer_price  }}</span>
+                                        <span class="new-price">TK{{ $product->offer_price }}</span>
+                                        <span class="old-price">Was TK{{ $product->main_price  }}</span>
                                         @endif
                                     </div><!-- End .product-price -->
                                     <div class="ratings-container">
@@ -225,8 +225,8 @@
                                 </div><!-- End .product-action -->
 
                                 <div class="product-action action-icon-top">
-                                    <button href="#" wire:click="$emit('addProduct' , {{ $product->id }})"
-                                        class="btn-product btn-cart"><span>add to cart</span></button>
+                                    <p href="#" wire:click="$emit('addProduct' , {{ $product->id }})"
+                                        class="btn-product addToCart-pointer btn-cart"><span>add to cart</span></p>
 
                                     {{-- <a href="popup/quickView.html" class="btn-product btn-quickview"
                                             title="Quick view"><span>quick view</span></a>
@@ -250,8 +250,8 @@
 
                                     @else
 
-                                    <span class="new-price">TK{{ $product->main_price }}</span>
-                                    <span class="old-price">Was TK{{ $product->offer_price  }}</span>
+                                     <span class="new-price">TK{{ $product->offer_price }}</span>
+                                        <span class="old-price">Was TK{{ $product->main_price  }}</span>
                                     @endif
                                 </div><!-- End .product-price -->
                                 <div class="ratings-container">
