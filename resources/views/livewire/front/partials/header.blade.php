@@ -35,7 +35,7 @@
                                     @else 
 
                                 {{-- <a  href="{{ route('login') }}">Sign in / Sign up</a> --}}
-                                <a href="#signin-modal" data-toggle="modal"><i class="icon-user"></i>Login</a>
+                                <a href="{{ route('customer.login') }}" ><i class="icon-user"></i>Login</a>
                                 @endauth
                             </li>
                         </ul>
@@ -120,11 +120,17 @@
                                                          @foreach ($category->shop as $shop)
                                                         <div class="col-md-6">
                                                     
-                                                             <div class="menu-title">{{ $shop->name }}</div><!-- End .menu-title -->
+                                                        <div class="menu-title">
+                                                            <a href="{{ route('front.single.shop',[$shop->id , $shop->slug]) }}">{{ $shop->name }}</a>
+                                                        </div>
                                                              <ul>
                                                                 @foreach ($shop->subcategorys as $subcategory)
                                                                 
-                                                                <li><a href="#">{{ $subcategory->name }}</a></li>
+                                                                <li>
+                                                                    <a href="{{ route('front.single.subcategory',[$subcategory->id,$subcategory->slug]) }}">
+                                                                     {{ $subcategory->name }}
+                                                                    </a>
+                                                                 </li>
 
                                                                 @endforeach
                                                                 
@@ -152,96 +158,7 @@
                                 </li>
                                 @endforeach
                                
-                                <li class="megamenu-container">
-                                    <a class="sf-with-ul" href="#">Clothing</a>
-
-                                    <div class="megamenu">
-                                        <div class="row no-gutters">
-                                            <div class="col-md-8">
-                                                <div class="menu-col">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="menu-title">Women</div><!-- End .menu-title -->
-                                                            <ul>
-                                                                <li><a href="#"><strong>New Arrivals</strong></a></li>
-                                                                <li><a href="#"><strong>Best Sellers</strong></a></li>
-                                                                <li><a href="#"><strong>Trending</strong></a></li>
-                                                                <li><a href="#">Clothing</a></li>
-                                                                <li><a href="#">Shoes</a></li>
-                                                                <li><a href="#">Bags</a></li>
-                                                                <li><a href="#">Accessories</a></li>
-                                                                <li><a href="#">Jewlery & Watches</a></li>
-                                                                <li><a href="#"><strong>Sale</strong></a></li>
-                                                            </ul>
-                                                        </div><!-- End .col-md-6 -->
-
-                                                        <div class="col-md-6">
-                                                            <div class="menu-title">Men</div><!-- End .menu-title -->
-                                                            <ul>
-                                                                <li><a href="#"><strong>New Arrivals</strong></a></li>
-                                                                <li><a href="#"><strong>Best Sellers</strong></a></li>
-                                                                <li><a href="#"><strong>Trending</strong></a></li>
-                                                                <li><a href="#">Clothing</a></li>
-                                                                <li><a href="#">Shoes</a></li>
-                                                                <li><a href="#">Bags</a></li>
-                                                                <li><a href="#">Accessories</a></li>
-                                                                <li><a href="#">Jewlery & Watches</a></li>
-                                                            </ul>
-                                                        </div><!-- End .col-md-6 -->
-                                                    </div><!-- End .row -->
-                                                </div><!-- End .menu-col -->
-                                            </div><!-- End .col-md-8 -->
-
-                                            <div class="col-md-4">
-                                                <div class="banner banner-overlay">
-                                                    <a href="category.html" class="banner banner-menu">
-                                                        <img src="{{ asset('user/assets/images/demos/demo-13/menu/banner-3.jpg') }}" alt="Banner">
-                                                    </a>
-                                                </div><!-- End .banner banner-overlay -->
-                                            </div><!-- End .col-md-4 -->
-                                        </div><!-- End .row -->
-
-                                        <div class="menu-col menu-brands">
-                                            <div class="row">
-                                                <div class="col-lg-2">
-                                                    <a href="#" class="brand">
-                                                        <img src="{{ asset('user/assets/images/brands/1.png') }}" alt="Brand Name">
-                                                    </a>
-                                                </div><!-- End .col-lg-2 -->
-
-                                                <div class="col-lg-2">
-                                                    <a href="#" class="brand">
-                                                        <img src="{{ asset('user/assets/images/brands/2.png') }}" alt="Brand Name">
-                                                    </a>
-                                                </div><!-- End .col-lg-2 -->
-
-                                                <div class="col-lg-2">
-                                                    <a href="#" class="brand">
-                                                        <img src="{{ asset('user/assets/images/brands/3.png') }}" alt="Brand Name">
-                                                    </a>
-                                                </div><!-- End .col-lg-2 -->
-
-                                                <div class="col-lg-2">
-                                                    <a href="#" class="brand">
-                                                        <img src="{{ asset('user/assets/images/brands/4.png') }}" alt="Brand Name">
-                                                    </a>
-                                                </div><!-- End .col-lg-2 -->
-
-                                                <div class="col-lg-2">
-                                                    <a href="#" class="brand">
-                                                        <img src="{{ asset('user/assets/images/brands/5.png') }}" alt="Brand Name">
-                                                    </a>
-                                                </div><!-- End .col-lg-2 -->
-
-                                                <div class="col-lg-2">
-                                                    <a href="#" class="brand">
-                                                        <img src="{{ asset('user/assets/images/brands/6.png') }}" alt="Brand Name">
-                                                    </a>
-                                                </div><!-- End .col-lg-2 -->
-                                            </div><!-- End .row -->
-                                        </div><!-- End .menu-brands -->
-                                    </div><!-- End .megamenu -->
-                                </li>
+                              
                                 {{-- <li><a href="#">Home Appliances</a></li>
                                 <li><a href="#">Healthy & Beauty</a></li>
                                 <li><a href="#">Shoes & Boots</a></li>
@@ -254,7 +171,7 @@
                     </div><!-- End .dropdown-menu -->
                 </div><!-- End .category-dropdown -->
             </div><!-- End .col-lg-3 -->
-            <div class="header-center">
+            {{-- <div class="header-center">
                 <nav class="main-nav">
                     <ul class="menu sf-arrows">
                         <li>
@@ -279,7 +196,7 @@
                         </li>
                     </ul><!-- End .menu -->
                 </nav><!-- End .main-nav -->
-            </div><!-- End .col-lg-9 -->
+            </div><!-- End .col-lg-9 --> --}}
             <div class="header-right">
                 <i class="la la-lightbulb-o"></i><p>Clearance Up to 30% Off</span></p>
             </div>

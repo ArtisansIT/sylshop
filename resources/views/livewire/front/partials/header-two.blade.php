@@ -44,7 +44,7 @@
                                 
                                 @else
 
-                                <li><a href="#signin-modal" data-toggle="modal"><i class="icon-user"></i>Login</a></li>
+                                 <a href="{{ route('customer.login') }}" ><i class="icon-user"></i>Login</a>
                                 {{-- <a  href="{{ route('login') }}">Sign in / Sign up</a> --}}
                                 @endauth
                             </ul>
@@ -70,7 +70,7 @@
                         <ul class="menu sf-arrows">
 
                             <li>
-                                <a href="category.html" class="sf-with-ul">Shop</a>
+                                <a href="#" class="sf-with-ul">Shop</a>
 
                                 <div class="megamenu megamenu-md">
                                     <div class="row no-gutters">
@@ -81,7 +81,9 @@
                                                     @foreach ($categorys as $category)
 
                                                     <div class="col-md-6">
-                                                        <div class="menu-title">{{ $category->name }}</div>
+                                                        <div class="menu-title">
+                                                            <a href="{{ route('front.category',[$category->id , $category->slug]) }}">{{ $category->name }}</a>
+                                                        </div>
                                                         <!-- End .menu-title -->
                                                         <ul>
                                                             @foreach ($category->shop as $shop)
@@ -127,7 +129,9 @@
                                                     @foreach ($shops as $shop)
 
                                                     <div class="col-md-6">
-                                                        <div class="menu-title">{{ $shop->name }}</div>
+                                                        <div class="menu-title">
+                                                            <a href="{{ route('front.single.shop',[$shop->id , $shop->slug]) }}">{{ $shop->name }}</a>
+                                                        </div>
                                                         <!-- End .menu-title -->
                                                         <ul>
                                                             @foreach ($shop->subcategorys as $subcategory)

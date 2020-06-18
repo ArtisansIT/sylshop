@@ -18,10 +18,8 @@ class UserMiddleware
     {
         if (Auth::check() && Auth::user()->role_id == 1) {
             return $next($request);
-        }
-        else
-        {
-            return redirect()->route('login');
+        } else {
+            return redirect()->route('customer.login');
         }
     }
 }

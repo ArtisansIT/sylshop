@@ -38,7 +38,7 @@
 
                             <tr>
                               
-                                 <td>{{ isset($shop->slug ) ? $shop->slug  : ''}}</td>
+                                 <td>{{ isset($shop->name ) ? $shop->name  : ''}}</td>
                                 <td class="align-middle">
 
                                     <img alt="image" class="rounded-circle" @if (isset($shop->image->url))
@@ -48,9 +48,9 @@
                                 </td>
                                 <td class="align-middle">
 
-                                    <img alt="image" class="" @if (isset($shop->image->banner))
-                                        src="{{ asset('images/'.$shop->image->banner) }}" width="70">
-                                        @endif
+                                    <img  class="" @if (!empty($shop->image->banner))
+                                        src="{{ asset('images/'.$shop->image->banner) }}" @else alt="image" @endif width="70">
+                                        
                                 </td>
                                 <td>{{ $shop->category->name ? $shop->category->name : '' }}</td>
 

@@ -51,6 +51,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'layout' => 'admin.layouts.
     Route::livewire('coupane', 'admin.coupane.create')->name('coupane');
     Route::livewire('pickup', 'admin.pickup.create')->name('pickup');
     Route::livewire('payment', 'admin.payment.create')->name('payment');
+    Route::livewire('citems', 'admin.citems.create')->name('citems');
 });
 
 //Frontend
@@ -70,3 +71,5 @@ Route::layout('layouts.app')->as('front.')->group(function () {
     Route::livewire('/subcategory', 'front.pages.subcategory-list')->name('subcategory');
     Route::livewire('/subcategory/{subcategory}-{slug}', 'front.pages.single-subcategory')->name('single.subcategory');
 });
+
+Route::livewire('/user-login', 'front.pages.auth.login')->name('customer.login');

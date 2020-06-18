@@ -10,6 +10,10 @@ class PaymentMethod extends Component
 
     public $payments;
     public $paymentOption;
+    public $paymentField_address;
+    public $paymentField_pickup;
+    public $address_section_active;
+    public $pickup_section_active;
     public $orderDetails = [
         'name' => '',
         'mobile' => '',
@@ -21,10 +25,7 @@ class PaymentMethod extends Component
 
     protected $listeners = [
 
-        'changePickupValue',
-
-
-
+        'changePickupValue'
     ];
 
     public function mount()
@@ -32,6 +33,10 @@ class PaymentMethod extends Component
         $this->payments = Payment::all();
         $this->orderDetails['name'] = auth()->user()->name;
         $this->orderDetails['mobile'] = auth()->user()->phone;
+        $this->paymentField_address = true;
+        $this->paymentField_pickup = true;
+        $this->address_section_active = false;
+        $this->pickup_section_active = false;
     }
     public function render()
     {
@@ -46,7 +51,6 @@ class PaymentMethod extends Component
             'orderDetails.paymentOption' => 'required|numeric',
             'orderDetails.mobile' => 'required',
             'orderDetails.name' => 'required',
-            'orderDetails.address' => 'required',
         ]);
         $this->emit('confirmOrder', $this->orderDetails);
     }
@@ -56,5 +60,18 @@ class PaymentMethod extends Component
     {
 
         $this->orderDetails['pickup_id'] = $pickup['id'];
+    }
+
+    public function address_button_click()
+    {
+        $this->paymentField_address = false;
+        $this->address_section_active = true;
+        $this->paymentField_pickup = true;
+    }
+
+    public function pickup_button_click()
+    {
+        $this->paymentField = true;
+        $this->address_section_active = false;
     }
 }

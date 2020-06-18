@@ -185,10 +185,6 @@ class Cart extends Component
     public function confirmOrder($payment)
     {
 
-        dd(session()->get('current'));
-
-
-
         $currentUser =  Auth()->user()->id;
         $orderNo = rand(1, 9999) . $currentUser;
         $currentorder = Order::create([

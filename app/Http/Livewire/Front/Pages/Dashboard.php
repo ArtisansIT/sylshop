@@ -51,7 +51,7 @@ class Dashboard extends Component
 
     public function singleOrderShow($order, $component)
     {
-        $this->currentOrder = Order::with(['details.product.image', 'pickup'])
+        $this->currentOrder = Order::with(['details.product.image', 'details.product.comments', 'pickup'])
             ->findOrFail($order);
         $this->currentComponent = $component;
 

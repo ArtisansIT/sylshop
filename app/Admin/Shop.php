@@ -33,11 +33,11 @@ class Shop extends Model
 
     public function subcategorys()
     {
-        return $this->hasMany(Subcategory::class);
+        return $this->hasMany(Subcategory::class)->where('status', true);
     }
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class)->where('status', true);
     }
 
     public function stocks()

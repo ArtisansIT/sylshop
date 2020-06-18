@@ -55,6 +55,8 @@ class Product extends Model
         );
     }
 
+
+
     public function adons()
     {
         return $this->hasOne(PAdons::class);
@@ -66,7 +68,11 @@ class Product extends Model
 
     public function variations()
     {
-        return $this->hasMany(Variation::class);
+        return $this->hasMany(Variation::class)->where('status', true);
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
     public function getDiscountRateAttribute() //$product->discount_rate

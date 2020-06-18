@@ -70,6 +70,7 @@
               <a href="{{ route('admin.coupane') }}" class="nav-link"><i data-feather="monitor"></i><span>Coupane</span></a>
               <a href="{{ route('admin.pickup') }}" class="nav-link"><i data-feather="monitor"></i><span>Pick Up</span></a>
               <a href="{{ route('admin.payment') }}" class="nav-link"><i data-feather="monitor"></i><span>Payment</span></a>
+              <a href="{{ route('admin.citems') }}" class="nav-link"><i data-feather="monitor"></i><span>Comment Items</span></a>
             </li>
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i

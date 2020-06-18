@@ -18,7 +18,7 @@ class HeaderTwo extends Component
         return view('livewire.front.partials.header-two', [
             'categorys' => Category::with(['shop', 'shop.subcategorys'])
                 ->get(),
-            'shops' => Shop::with('subcategorys')->get()
+            'shops' => Shop::with('subcategorys')->where('status', true)->get()
         ]);
     }
 }

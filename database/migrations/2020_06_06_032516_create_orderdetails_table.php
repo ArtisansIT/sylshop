@@ -20,6 +20,7 @@ class CreateOrderdetailsTable extends Migration
             $table->integer('price');
             $table->integer('total');
             $table->integer('quentity');
+            $table->boolean('comment')->default(false)->index();
             $table->foreign('order_id')->references('id')->on('orders')->cascadeOnDelete();
             $table->foreign('product_id')->references('id')->on('products')->cascadeOnDelete();
             $table->timestamps();
