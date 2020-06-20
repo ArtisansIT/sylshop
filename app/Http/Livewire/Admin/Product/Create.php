@@ -28,6 +28,7 @@ class Create extends Component
     public $edit_product_page;
     public $one_product_all_image;
     public $go_update_stock_page;
+    public $go_update_variation_stock_page;
     public $pending_all_product_page;
 
 
@@ -58,6 +59,7 @@ class Create extends Component
     public $allimages;
 
     public $stock; // stock create page variable
+    public $variation_stock;
 
     public $selected_id; // stock  edit page
     public $categoryies;
@@ -65,6 +67,7 @@ class Create extends Component
     public $image;
 
     public $pro_id_for_update_stock;
+    public $pro_id_for_update_variation_stock;
 
     //pending Variable
 
@@ -98,6 +101,7 @@ class Create extends Component
         $this->edit_product_page = false;
         $this->one_product_all_image = false;
         $this->go_update_stock_page = false;
+        $this->go_update_variation_stock_page = false;
         $this->pending_all_product_page = false;
         $this->product_variation_create = false;
         $this->product_variation_index = false;
@@ -118,6 +122,7 @@ class Create extends Component
         $this->edit_product_page = false;
         $this->one_product_all_image = false;
         $this->go_update_stock_page = false;
+        $this->go_update_variation_stock_page = false;
         $this->pending_all_product_page = false;
         $this->product_variation_create = false;
         $this->product_variation_index = false;
@@ -130,6 +135,7 @@ class Create extends Component
         'edit_product',
         'see_all_image',
         'go_and_update_stock',
+        'go_and_update_variation_stock',
         'softDelete_product',
         'restore_product',
         'forceDelete_product',
@@ -209,12 +215,14 @@ class Create extends Component
     public function stock_create_for_the_proddct()
     {
         $this->validate([
-            'stock' => 'required'
+            'stock' => 'required',
+            'variation_stock' => 'required'
         ]);
 
 
         Stock::create([
             'stock' => $this->stock,
+            'variation_stock' => $this->variation_stock,
             'product_id' => $this->productId
         ]);
 
@@ -239,10 +247,55 @@ class Create extends Component
         $this->stock_page = true;
     }
 
+    public function go_and_update_variation_stock($product)
+
+    {
+        $this->pro_id_for_update_variation_stock = Stock::where('product_id', $product)
+            ->first();
+
+        $this->resetAllPageValue();
+        $this->variation_stock = '';
+        $this->go_update_variation_stock_page = true;
+    }
+
+
+    public function add_update_variation_stock()
+    {
+        $this->validate([
+            'variation_stock' => 'required',
+        ]);
+
+
+        $this->pro_id_for_update_variation_stock->update([
+            'variation_stock' =>
+            $this->pro_id_for_update_variation_stock->variation_stock +
+                $this->variation_stock,
+        ]);
+        $this->resetAllPageValue();
+        // $this->pro_id_for_update_stock = '';
+        $this->reset();
+        $this->all_product_page = true;
+    }
+    public function remove_update_variation_stock()
+    {
+        $this->validate([
+            'variation_stock' => 'required'
+        ]);
+
+
+        $this->pro_id_for_update_variation_stock->update([
+            'variation_stock' =>  $this->pro_id_for_update_variation_stock->variation_stock -
+                $this->variation_stock,
+        ]);
+        $this->resetAllPageValue();
+        $this->reset();
+        $this->all_product_page = true;
+    }
+
     public function add_update_stock()
     {
         $this->validate([
-            'stock' => 'required'
+            'stock' => 'required',
         ]);
 
 
@@ -280,6 +333,7 @@ class Create extends Component
         $this->stock = '';
         $this->go_update_stock_page = true;
     }
+
 
     public function imageInsert($product_id)
     {
@@ -465,7 +519,7 @@ class Create extends Component
     public function allVariation($product)
     {
         $this->allVariations = Product::with('variations')->findOrFail($product);
-        $this->restStock_in_all_variation = $this->allVariations->stock->stock - $this->allVariations
+        $this->restStock_in_all_variation = $this->allVariations->stock->variation_stock - $this->allVariations
             ->variations()->sum('stock');
         $this->resetAllPageValue();
         $this->product_variation_index = true;
@@ -488,7 +542,7 @@ class Create extends Component
 
         if ($data->variations->count() > 0) {
             $var_sum =  $data->variations()->sum('stock');
-            $this->rest = $data->stock->stock - $var_sum;
+            $this->rest = $data->stock->variation_stock - $var_sum;
         }
 
 
@@ -542,7 +596,7 @@ class Create extends Component
 
 
         $var_sum = ($data->variations()->sum('stock')) - $currentVariation->stock;
-        $this->rest = $data->stock->stock - $var_sum;
+        $this->rest = $data->stock->variation_stock - $var_sum;
 
 
 

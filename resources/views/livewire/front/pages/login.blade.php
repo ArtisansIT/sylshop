@@ -77,10 +77,10 @@
                             </div><!-- .End .tab-pane -->
                             <div class="tab-pane fade show active" id="register-2" role="tabpanel"
                                 aria-labelledby="register-tab-2">
-                                  <form method="POST" action="{{ route('register') }}">
+                                  <form wire:submit.prevent="registaion">
                                     @csrf
                                     <div class="form-group">
-                                        <label for="register-email">Your name</label>
+                                        <label for="register-email">  </label>
                                         <input id="name" type="text" class="form-control
                                              @error('user_name') is-invalid @enderror" required name="user_name"  autocomplete="name"
                                             autofocus value="{{ old('user_name') }}">

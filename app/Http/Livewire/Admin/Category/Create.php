@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Category;
 
 use App\Admin\Category;
+use App\Admin\Shop;
 use Livewire\Component;
 
 class Create extends Component
@@ -117,10 +118,18 @@ class Create extends Component
     }
     public function forceDelete($category)
     {
+        $shops = Shop::onlyTrashed()->where('category_id', $category)->get();
 
-        $data = Category::where('id', $category)->onlyTrashed()->first();
-        \File::delete('images/' . $data->image->url);
-        $data->image()->delete();
+        if ($shops->count() <= 0) {
+
+            $data = Category::where('id', $category)->onlyTrashed()->first();
+            \File::delete('images/' . $data->image->url);
+            $data->image()->delete();
+        } else {
+            session()->flash('message', 'Can not Delete category , 
+            First Delete all shop.');
+            return redirect()->route('admin.category_create');
+        }
 
         $data->forceDelete();
         $this->resetPage();

@@ -13,6 +13,13 @@ class Login extends Component
         'password' => '',
     ];
 
+
+    protected $listeners = [
+
+        'viewLoginPage',
+
+    ];
+
     public $loginComponentIsActive;
 
     public function mount()
@@ -46,5 +53,14 @@ class Login extends Component
         } else {
             return redirect()->intended('admin/dashboard');
         }
+    }
+
+    public function viewRegisterPage()
+    {
+        $this->loginComponentIsActive = false;
+    }
+    public function viewLoginPage()
+    {
+        $this->loginComponentIsActive = true;
     }
 }

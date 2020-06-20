@@ -9,28 +9,28 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Index extends Component
 {
-    // public function mount()
-    // {
-    //     alert()->success('SuccessAlert', 'Lorem ipsum dolor sit amet.');
-    // }
+    public $categorys;
+    public $firstCategory;
+    public $dealCategory;
+    public function mount()
+    {
+        $this->firstCategory = Category::first();
+        $this->categorys = Category::with('image', 'products', 'products.image', 'products.shop')
+            ->where('popular', true)->get();
 
-    // protected $listeners = [
-    //     'cartOverload',
+        $this->dealCategory = Category::with(['products' => function ($query) {
+            $query->whereHas('adons', function (Builder $query) {
+                $query->where('today_offer', true);
+            })->get();
+        }])->get();
+    }
 
-    // ];
+
 
 
     public function render()
     {
-        return view('livewire.front.pages.index', [
-            'categorys' => Category::with('image', 'products', 'products.image', 'products.shop')
-                ->where('popular', true)->get(),
-            'dealCategory' => Category::with(['products' => function ($query) {
-                $query->whereHas('adons', function (Builder $query) {
-                    $query->where('today_offer', true);
-                })->get();
-            }])->get()
-        ]);
+        return view('livewire.front.pages.index');
     }
 
     public function addToCart($productId)

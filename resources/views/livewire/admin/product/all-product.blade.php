@@ -112,6 +112,9 @@
                                             <button type="button" class="btn btn-warning m-1"
                                                 wire:click="go_and_update_stock({{ $product->id }})">stock
                                             </button>
+                                            <button type="button" class="btn btn-dark m-1"
+                                                wire:click="go_and_update_variation_stock({{ $product->id }})">Variation Stock
+                                            </button>
                                             <button type="button" class="btn btn-danger m-1"
                                                 onclick="confirm('Are you want To delete') || event.stopImmediatePropagation()"
                                                 wire:click="softDelete_product({{ $product->id }})">Delete

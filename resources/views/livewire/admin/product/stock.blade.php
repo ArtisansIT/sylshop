@@ -10,6 +10,13 @@
 
                             <input type="number" wire:model="stock" class="form-control form-control-sm">
                         </div>
+                        
+                      <div class="form-group">
+                            <label><code>*</code><strong>variation stock</strong>
+                                @error('variation_stock')<code>{{ $message }}</code> @enderror</label>
+
+                            <input type="number" wire:model="variation_stock" class="form-control form-control-sm">
+                        </div>
 
                         <button wire:click="stock_create_for_the_proddct" class="btn btn-primary">submit</button>
 

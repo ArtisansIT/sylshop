@@ -52,7 +52,14 @@
                                         src="{{ asset('images/'.$shop->image->banner) }}" @else alt="image" @endif width="70">
                                         
                                 </td>
-                                <td>{{ $shop->category->name ? $shop->category->name : '' }}</td>
+                                 <td>
+                                     
+                                    {{ isset($shop->category->name ) ? 
+                                     $shop->category->name  :
+                                      'category is not active'}}
+                                
+                                </td>
+                                {{-- <td>{{ $shop->category->name ? $shop->category->name : '' }}</td> --}}
 
                              
 

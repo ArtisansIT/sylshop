@@ -23,16 +23,18 @@
     <meta name="msapplication-TileColor" content="#cc9966">
     <meta name="msapplication-config" content="assets/images/icons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href=" /user/assets/vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css ">
+    <link rel="stylesheet" href="{{ asset('user/assets/vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css') }}">
     <!-- Plugins CSS File -->
-    <link rel="stylesheet" href="/user/assets/css/bootstrap.min.css ">
-    <link rel="stylesheet" href="/user/assets/css/plugins/owl-carousel/owl.carousel.css ">
-    <link rel="stylesheet" href="/user/assets/css/plugins/magnific-popup/magnific-popup.css ">
-    <link rel="stylesheet" href="/user/assets/css/plugins/jquery.countdown.css ">
+    <link rel="stylesheet" href="{{ asset('user/assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('user/assets/css/plugins/owl-carousel/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ asset('user/assets/css/plugins/magnific-popup/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('user/assets/css/plugins/jquery.countdown.css') }}">
     <!-- Main CSS File -->
-    <link rel="stylesheet" href="/user/assets/css/style.css ">
-   
-    <link rel="stylesheet" href="/user/toster/toastr.min.css ">
+    <link rel="stylesheet" href="{{ asset('user/assets/css/style.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('user/assets/css/skins/skin-demo-13.css') }}">
+    <link rel="stylesheet" href="{{ asset('user/assets/css/demos/demo-13.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/nouislider/nouislider.css') }}">
+    <link rel="stylesheet" href="{{ asset('user/toster/toastr.min.css') }}">
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"> --}}
 
     @livewireScripts

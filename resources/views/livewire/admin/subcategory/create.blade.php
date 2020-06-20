@@ -3,7 +3,7 @@
         <div class="col-md-10 offset-md-1 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Create new Category</h4>
+                    <h4>Create new sub-category</h4>
                     <div class="card-header-action">
                         @if ($goto_create_page == false)
 
@@ -49,7 +49,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label><code>*</code><strong>Shop name</strong> @error('name')<code>{{ $message }}</code>
+                            <label><code>*</code><strong>sub-category name</strong> @error('name')<code>{{ $message }}</code>
                                 @enderror</label>
 
                             <input type="text" wire:model="name" class="form-control form-control-sm">

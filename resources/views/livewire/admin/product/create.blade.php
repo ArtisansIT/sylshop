@@ -180,6 +180,8 @@
             </div>
             @elseif($stock_page == true)
             @include('livewire.admin.product.stock')
+            @elseif($go_update_variation_stock_page == true)
+            @include('livewire.admin.product.variation-stock')
             @elseif($img_upload_page == true)
             @include('livewire.admin.product.image-create')
             @elseif($edit_product_page == true)

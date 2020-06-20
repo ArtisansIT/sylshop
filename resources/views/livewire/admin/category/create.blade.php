@@ -35,9 +35,15 @@
                 @if ($goto_create_page == true)
 
                 <div class="card-body">
-
                     <form action="{{ route('admin.category.store') }}" enctype="multipart/form-data" method="post">
                         @csrf
+                        <div>
+                            @if (session()->has('message'))
+                            <div class="alert alert-success">
+                                {{ session('message') }}
+                            </div>
+                            @endif
+                        </div>
                         <div class="form-group">
                             <label><code>*</code><strong>Category name</strong>
                                 @error('name')<code>{{ $message }}</code> @enderror</label>

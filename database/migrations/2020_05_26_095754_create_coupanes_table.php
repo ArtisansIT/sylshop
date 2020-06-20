@@ -18,14 +18,17 @@ class CreateCoupanesTable extends Migration
             $table->unsignedBigInteger('category_id')->index()->nullable();
             $table->unsignedBigInteger('shop_id')->index()->nullable();
             $table->unsignedBigInteger('subcategory_id')->index()->nullable();
+            $table->unsignedBigInteger('user_id')->index()->nullable();
             $table->string('name');
             $table->string('code');
             $table->integer('total');
             $table->integer('discount');
-            $table->softDeletes();
+            $table->integer('coin')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('subcategory_id')->references('id')->on('subcategories')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

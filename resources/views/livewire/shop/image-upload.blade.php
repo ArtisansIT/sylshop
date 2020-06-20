@@ -12,7 +12,7 @@
                             <label>Image</label>
                             <div class="input-group">
                                
-                                <input type="file" wire:model="image" class="form-control"  name="image">
+                                <input type="file" class="form-control"  name="image">
                             </div>
                         </div>
                         <br>
@@ -20,7 +20,7 @@
                             <label>Banner</label>
                             <div class="input-group">
                                
-                                <input type="file" wire:model="banner" class="form-control"  name="banner">
+                                <input type="file"  class="form-control"  name="banner">
                             </div>
                         </div>
 

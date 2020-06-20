@@ -52,6 +52,10 @@ class AllProduct extends Component
     {
         $this->emit('go_and_update_stock', $product);
     }
+    public function go_and_update_variation_stock($product)
+    {
+        $this->emit('go_and_update_variation_stock', $product);
+    }
 
     public function softDelete_product($product)
     {

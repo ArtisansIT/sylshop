@@ -52,10 +52,10 @@
                             @foreach ($dealCategory as $category)
 
                             <li class="nav-item">
-                                <a class="nav-link @if($category->id == $categorys->first()->id)  active  @endif"
+                                <a class="nav-link @if($category->id == $firstCategory->id)  active  @endif"
                                     id="{{ $category->id }}-link" data-toggle="tab" href="#category-{{ $category->id }}"
                                     role="tab" aria-controls="category-{{ $category->id }}"
-                                    aria-selected=" @if($category->id == $categorys->first()->id)true @else false  @endif">
+                                    aria-selected=" @if($category->id ==  $firstCategory->id)true @else false  @endif">
                                     {{ $category->name }}
                                 </a>
                             </li>
@@ -69,7 +69,7 @@
 
                     @foreach ($dealCategory as $category)
 
-                    <div class="tab-pane p-0 fade @if($category->id == $categorys->first()->id) show active @endif  "
+                    <div class="tab-pane p-0 fade @if($category->id ==  $firstCategory->id) show active @endif  "
                         id="category-{{ $category->id }}" role="tabpanel" aria-labelledby="{{ $category->id }}-link">
                         <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow"
                             data-toggle="owl" data-owl-options='{
