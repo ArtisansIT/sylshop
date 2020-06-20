@@ -48,10 +48,11 @@ class Login extends Component
 
     public function returnRedirect()
     {
-        if (Auth::check() && Auth::user()->role_id == 1) {
-            return redirect()->intended('user/dashboard');
+        if (Auth::check() && Auth::user()->role_id == 2) {
+		return redirect()->intended('admin/dashboard');
+           
         } else {
-            return redirect()->intended('admin/dashboard');
+             return redirect()->intended('user/dashboard');
         }
     }
 
