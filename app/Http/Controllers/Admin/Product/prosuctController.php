@@ -22,7 +22,7 @@ class prosuctController extends Controller
 
             $product->status = true;
             $product->save();
-            $product->image()->create(['url' => $this->categoryRepositories->resizeImage($request, 460, 460, 'product')]);
+            $product->image()->create(['url' => $this->categoryRepositories->resizeImage($request, 460, 460, 'product', 'image')]);
             return redirect()->back();
         } else {
             return redirect()->back();
