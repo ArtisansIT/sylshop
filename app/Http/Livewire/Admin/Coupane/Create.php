@@ -11,6 +11,7 @@ class Create extends Component
     public $go_Category;
     public $go_subCategory;
     public $go_shop;
+    public $go_user;
     public $all_caoupane;
     public $show_navigation;
 
@@ -25,8 +26,20 @@ class Create extends Component
         $this->go_Category = false;
         $this->go_subCategory = false;
         $this->go_shop = false;
+        $this->go_user = false;
         $this->all_caoupane = false;
         $this->show_navigation = false;
+    }
+
+    public function pageReset()
+    {
+        $this->indexPage = false;
+        $this->go_Category = false;
+        $this->go_subCategory = false;
+        $this->go_shop = false;
+        $this->go_user = false;
+        $this->all_caoupane = false;
+        $this->show_navigation = true;
     }
     public function render()
     {
@@ -35,35 +48,28 @@ class Create extends Component
 
     public function go_index()
     {
+        $this->pageReset();
         $this->indexPage = true;
-        $this->go_shop = false;
-        $this->go_subCategory = false;
-        $this->go_Category = false;
-        $this->show_navigation = false;
     }
     public function go_category()
     {
-        $this->indexPage = false;
-        $this->go_shop = false;
-        $this->go_subCategory = false;
+        $this->pageReset();
         $this->go_Category = true;
-        $this->show_navigation = true;
     }
     public function go_shop()
     {
-        $this->indexPage = false;
-        $this->go_Category = false;
-        $this->go_subCategory = false;
+        $this->pageReset();
         $this->go_shop = true;
-        $this->show_navigation = true;
+    }
+    public function go_user()
+    {
+        $this->pageReset();
+        $this->go_user = true;
     }
     public function go_subCategory()
     {
-        $this->indexPage = false;
-        $this->go_Category = false;
-        $this->go_shop = false;
+        $this->pageReset();
         $this->go_subCategory = true;
-        $this->show_navigation = true;
     }
 
     public function coupaneCreate()

@@ -19,7 +19,7 @@
 
             </div>
             <div class="col-md-6">
-
+                 <label><code>*</code><strong>Shipping Information *</strong>
 
 
                 @if ($address_section_active == true)
@@ -43,7 +43,7 @@
                 @endif
 
                 <div class="form-group">
-                    <label><code>*</code><strong>Shipping Address *</strong>
+                   
                         @if ($paymentField_address == true)
                         <div class="filter-item">
                             <div class="custom-control custom-checkbox">

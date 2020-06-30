@@ -103,6 +103,7 @@ class SmallCartView extends Component
                 $cart[$product]['price'] = $cart[$product]['main_price'];
             }
         }
+
         $cart[$product]['total'] = $price * $quentity;
         $cart[$product]['shipping_cost'] = $cart[$product]->shop->shipping;
         session()->put('cart', $cart);
@@ -110,8 +111,7 @@ class SmallCartView extends Component
         $this->total = collect($this->cart)->pluck('total')->sum();
         $this->emit('updateHeaderTwoCartNumber');
         $this->emit('addToCartToastMessage', ['type' => 'success', 'message' => '<h5> Product is added to cart </h5>']);
-        // session()->forget('variation');
-
+        session()->forget('variation');
     }
 
 

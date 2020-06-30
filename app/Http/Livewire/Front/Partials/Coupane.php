@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Front\Partials;
 
 use App\Admin\Coupane as AdminCoupane;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Coupane extends Component
@@ -48,6 +49,15 @@ class Coupane extends Component
                     ->where('shop_id', $cop->shop_id)
                     ->where('subcategory_id', $cop->subcategory_id)
                     ->all();
+            } elseif (
+                $cop->category_id == null  &&
+                $cop->shop_id == null  &&
+                $cop->subcategory_id == null &&
+                $cop->user_id == Auth::user()->id
+                // !empty($cop->coin) 
+
+            ) {
+                $this->data = $cart->all();
             }
 
             if (!empty($this->data)) {
@@ -55,22 +65,30 @@ class Coupane extends Component
                 $coupane_has_total = collect($this->data)->pluck('total')->sum();
                 if ($coupane_has_total >= $cop->total) {
                     $this->discount = $cop->discount;
-                    $this->emit('coupaneActive', $this->discount);
+                    $this->emit('coupaneActive', $this->discount, $cop->id);
+
+                    //coupaneActive goes to Cart page , calculate Discount
+                    //$cop->id is carring coupane id and send it to the order
                     $this->coupane = '';
+                    $cop = '';
                 } else {
                     $need_to_buy = $cop->total - $coupane_has_total;
                     session()->flash('message', 'You Need To Buy More' . ' ' .
                         $need_to_buy . '      ' . 'TK  On Specefic Iteam');
                     $this->coupane = '';
+                    $cop = '';
                 }
+                $this->data = '';
             } else {
 
                 session()->flash('message', 'Invalide Coupane.');
                 $this->coupane = '';
+                $cop = '';
             }
         } else {
             session()->flash('message', 'Invalide Coupane.');
             $this->coupane = '';
+            $cop = '';
         }
 
 

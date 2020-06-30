@@ -14,7 +14,13 @@ class ConfirmeOrder extends Component
     {
 
         $this->orders = Order::with('details')
-            ->where('confirmed', true)
+            ->where([
+                ['pending', true],
+                ['confirmed', true],
+                ['processing', false],
+                ['picked', false],
+                ['delivered', false],
+            ])
             ->get();
     }
     public function render()

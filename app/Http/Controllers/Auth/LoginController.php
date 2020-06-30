@@ -39,7 +39,7 @@ class LoginController extends Controller
 
     {
         if (Auth::check() && Auth::user()->role_id == 1) {
-            $this->redirectTo = route('front.dashboard');
+            $this->redirectTo = route('user.dashboard');
         } else {
             $this->redirectTo = route('admin.dashboard');
         }

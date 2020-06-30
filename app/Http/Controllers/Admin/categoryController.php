@@ -56,7 +56,7 @@ class categoryController extends Controller
 
 
         $category = Category::create($request->only(['name']));
-        $category->image()->create(['url' => $this->categoryRepositories->resizeImage($request, 131, 117, 'category')]);
+        $category->image()->create(['url' => $this->categoryRepositories->resizeImage($request, 131, 117, 'category', 'image')]);
         return redirect()->back()->withSuccess('asdfasdfsdf');
     }
 
@@ -94,11 +94,10 @@ class categoryController extends Controller
         if (isset($category->image->url)) {
 
             \File::delete('images/' . $category->image->url);
-            $category->image()->delete();
-            $category->image()->create(['url' => $this->categoryRepositories->resizeImage($request, 131, 117, 'category')]);
+            $category->image()->update(['url' => $this->categoryRepositories->resizeImage($request, 131, 117, 'category', 'image')]);
             return redirect()->back()->withSuccess('asdfasdfsdf');
         }
-        $category->image()->create(['url' => $this->categoryRepositories->resizeImage($request, 131, 117, 'category')]);
+        $category->image()->create(['url' => $this->categoryRepositories->resizeImage($request, 131, 117, 'category', 'image')]);
         return redirect()->back()->withSuccess('asdfasdfsdf');
     }
 

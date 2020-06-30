@@ -14,7 +14,13 @@ class ProcessingOrder extends Component
     {
 
         $this->orders = Order::with('details')
-            ->where('processing', true)
+            ->where([
+                ['pending', true],
+                ['confirmed', true],
+                ['processing', true],
+                ['picked', false],
+                ['delivered', false],
+            ])
             ->get();
     }
     public function render()

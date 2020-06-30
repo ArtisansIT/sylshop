@@ -87,6 +87,8 @@
     <script src="{{ asset('user/assets/js/main.js') }}"></script>
     <script src="{{ asset('user/assets/js/jquery.elevateZoom.min.js') }}"></script>
     <script src="{{ asset('user/toster/toastr.min.js') }}"></script>
+    
+    
     {{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
 </body>
 

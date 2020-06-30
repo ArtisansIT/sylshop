@@ -30,7 +30,7 @@
                                     @if(auth()->user()->role_id == 2)
                                         <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                                         @else
-                                        <li><a href="{{ route('front.dashboard') }}">Dashboard</a></li>
+                                        <li><a href="{{ route('user.dashboard') }}">Dashboard</a></li>
                                         @endif
                                     @else 
 

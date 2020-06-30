@@ -66,12 +66,15 @@ class PaymentMethod extends Component
     {
         $this->paymentField_address = false;
         $this->address_section_active = true;
+        $this->pickup_section_active = false;
         $this->paymentField_pickup = true;
     }
 
     public function pickup_button_click()
     {
-        $this->paymentField = true;
+        $this->paymentField_address = true;
+        $this->pickup_section_active = true;
         $this->address_section_active = false;
+        $this->paymentField_pickup = false;
     }
 }

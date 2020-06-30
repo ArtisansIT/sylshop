@@ -68,8 +68,10 @@
               <a href="{{ route('admin.subcategory_create') }}" class="nav-link"><i data-feather="monitor"></i><span>Sub-Category</span></a>
               <a href="{{ route('admin.product') }}" class="nav-link"><i data-feather="monitor"></i><span>Product</span></a>
               <a href="{{ route('admin.coupane') }}" class="nav-link"><i data-feather="monitor"></i><span>Coupane</span></a>
+              <a href="{{ route('admin.coupane_with_user') }}" class="nav-link"><i data-feather="monitor"></i><span>User & Coupane</span></a>
               <a href="{{ route('admin.pickup') }}" class="nav-link"><i data-feather="monitor"></i><span>Pick Up</span></a>
               <a href="{{ route('admin.payment') }}" class="nav-link"><i data-feather="monitor"></i><span>Payment</span></a>
+              <a href="{{ route('admin.all_order') }}" class="nav-link"><i data-feather="monitor"></i><span>All Order</span></a>
               <a href="{{ route('admin.citems') }}" class="nav-link"><i data-feather="monitor"></i><span>Comment Items</span></a>
             </li>
             <li class="dropdown">

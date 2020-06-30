@@ -93,13 +93,11 @@
 
                                             </div><!-- End .details-action-col -->
 
-                                            <div class="details-action-wrapper">
-                                                <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add
-                                                        to
-                                                        Wishlist</span></a>
-                                                <a href="#" class="btn-product btn-compare" title="Compare"><span>Add to
-                                                        Compare</span></a>
-                                            </div><!-- End .details-action-wrapper -->
+                                           
+                                                 @livewire('front.partials.product-like', [
+                                    'product' => $product->id
+                                    ])
+                                             
                                         </div><!-- End .product-details-action -->
                                     </div>
                                     {{-- @livewire('front.partials.add-to-cart', [

@@ -51,9 +51,6 @@ class shopController extends Controller
      */
     public function store(Request $request, Shop $shop)
     {
-        dd($shop);
-        $shop->image()->create(['url' => $this->categoryRepositories->resizeImage($request)]);
-        return redirect()->back()->withSuccess('shop create');
     }
 
     public function all_pending_shop()
@@ -96,8 +93,8 @@ class shopController extends Controller
         $shop->status = true;
         $shop->save();
         $shop->image()->create([
-            'url' => $this->categoryRepositories->resizeImage($request, 280, 280, 'shop'),
-            'banner' => $this->categoryRepositories->resizeImage($request, 932, 260, 'shop_banner')
+            'url' => $this->categoryRepositories->resizeImage($request, 280, 280, 'shop', 'image'),
+            'banner' => $this->categoryRepositories->resizeImage($request, 932, 260, 'shop_banner', 'banner')
         ]);
         return redirect()->back()->withSuccess('shop create');
     }
@@ -118,17 +115,17 @@ class shopController extends Controller
         if ($request->image && $request->banner) {
 
             \File::delete('images/' . $image_select_id->image->url);
-            $image_select_id->image()->update(['url' => $this->categoryRepositories->resizeImage($request, 280, 280, 'shop')]);
+            $image_select_id->image()->update(['url' => $this->categoryRepositories->resizeImage($request, 280, 280, 'shop', 'image')]);
 
 
             \File::delete('images/' . $image_select_id->image->banner);
-            $image_select_id->image()->update(['banner' => $this->categoryRepositories->resizeImage($request, 932, 260, 'shop_banner')]);
+            $image_select_id->image()->update(['banner' => $this->categoryRepositories->resizeImage($request, 932, 260, 'shop_banner', 'banner')]);
         } elseif ($request->image) {
             \File::delete('images/' . $image_select_id->image->url);
-            $image_select_id->image()->update(['url' => $this->categoryRepositories->resizeImage($request, 280, 280, 'shop')]);
+            $image_select_id->image()->update(['url' => $this->categoryRepositories->resizeImage($request, 280, 280, 'shop', 'image')]);
         } else {
             \File::delete('images/' . $image_select_id->image->banner);
-            $image_select_id->image()->update(['banner' => $this->categoryRepositories->resizeImage($request, 932, 260, 'shop_banner')]);
+            $image_select_id->image()->update(['banner' => $this->categoryRepositories->resizeImage($request, 932, 260, 'shop_banner', 'banner')]);
         }
         return redirect()->back();
     }

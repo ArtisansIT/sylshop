@@ -1,6 +1,6 @@
 <div>
     <div class="row">
-        <div class="col-md-10 offset-md-1 col-sm-12 col-xs-12">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <h4>Create new sub-category</h4>

@@ -32,8 +32,13 @@
     <div class="loader"></div>
     <div id="app">
         <div class="main-wrapper main-wrapper-1">
-
+            @if (auth()->check() && auth()->user()->role_id == 1)
+                
+            @include('admin/partials/headerForUserNotAdmin')
+            @else
+                
             @include('admin/partials/header')
+            @endif
 
 
 
@@ -69,12 +74,6 @@
 
     <!-- Custom JS File -->
     
-    
-
-
-
-
-    @include('sweetalert::alert')
 
 
     

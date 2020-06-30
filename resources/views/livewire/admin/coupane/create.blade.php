@@ -39,6 +39,14 @@
                            shop
                         </a>
                         @endif
+                        @if ($go_user == false)
+
+                        <a href="#"
+                         wire:click="go_user" 
+                         class="btn btn-primary">
+                           User
+                        </a>
+                        @endif
                         @if ($all_caoupane == false)
 
                         <a href="#"
@@ -103,6 +111,20 @@
                 </div>
             </div>
         </div>
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card card-danger">
+                <div class="card-header">
+                    <a class="btn"
+                     wire:click="go_user"
+                    href="#">
+                        <h4>User</h4>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <p>Card <code>.card-danger</code></p>
+                </div>
+            </div>
+        </div>
 
 
     </div>
@@ -110,6 +132,8 @@
     @livewire('admin.coupane.category')
     @elseif($go_shop == true)
     @livewire('admin.coupane.shop')
+    @elseif($go_user == true)
+    @livewire('admin.coupane.user')
     @elseif($go_subCategory == true)
     @livewire('admin.coupane.subcategory')
     @endif

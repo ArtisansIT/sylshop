@@ -51,10 +51,25 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'layout' => 'admin.layouts.
     Route::livewire('coupane', 'admin.coupane.create')->name('coupane');
     Route::livewire('pickup', 'admin.pickup.create')->name('pickup');
     Route::livewire('payment', 'admin.payment.create')->name('payment');
+    Route::livewire('payment', 'admin.payment.create')->name('payment');
     Route::livewire('citems', 'admin.citems.create')->name('citems');
+    Route::livewire('coupane-with-user', 'admin.userwithcoupane.users')->name('coupane_with_user');
+    Route::livewire('all-order', 'admin.order.all-order')->name('all_order');
 });
 
+
+
 //Frontend
+
+Route::group(['layout' => 'admin.layouts.app', 'as' => 'user.', 'section' => 'mainContent', 'middleware' => ['auth', 'user']], function () {
+
+
+
+    Route::livewire('/user/dashboard', 'user.dashboard.home')->name('dashboard');
+    Route::livewire('/all-orders', 'user.dashboard.order.all-orders')->name('all_orders');
+});
+
+
 
 Route::layout('layouts.app')->as('front.')->group(function () {
 
@@ -64,7 +79,6 @@ Route::layout('layouts.app')->as('front.')->group(function () {
     Route::group(['middleware' => ['auth', 'user']], function () {
 
         Route::livewire('/cart', 'front.pages.cart')->name('cart');
-        Route::livewire('/user/dashboard', 'front.pages.dashboard')->name('dashboard');
     });
     Route::livewire('/shop', 'front.pages.shop-list')->name('shop');
     Route::livewire('/shop/{shop}-{slug}', 'front.pages.single-shop')->name('single.shop');

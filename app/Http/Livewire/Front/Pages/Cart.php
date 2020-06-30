@@ -2,10 +2,13 @@
 
 namespace App\Http\Livewire\Front\Pages;
 
+use App\Admin\Coupane;
 use App\Admin\Order;
 use App\Admin\Payment;
 use App\Admin\Product;
-
+use App\Admin\Stock;
+use App\Admin\userordercoupane;
+use App\Admin\Variation;
 use Livewire\Component;
 
 
@@ -17,6 +20,7 @@ class Cart extends Component
     public $shipping_cost;
     public $total_with_shiping;
     public $discount = 0;
+    public $coupane = null;
     public $currentPickup;
 
     public $name;
@@ -25,6 +29,7 @@ class Cart extends Component
     public $address;
 
     public $current_global_stock_variable;
+    public $shopping_with_Coin = false;
 
 
 
@@ -184,9 +189,19 @@ class Cart extends Component
 
     public function confirmOrder($payment)
     {
+        // dd($this->cart);
 
         $currentUser =  Auth()->user()->id;
         $orderNo = rand(1, 9999) . $currentUser;
+        if (empty($payment['pickup_id']) && empty($payment['address'])) {
+            $this->emit(
+                'on_address_no_pickup',
+                ['type' => 'error', 'message' => '<h5> Address Or Pickup station must select </h5>']
+            );
+
+            $this->mount();
+            return false;
+        }
         $currentorder = Order::create([
             'user_id' => $currentUser,
             'code' => $orderNo,
@@ -198,22 +213,64 @@ class Cart extends Component
             'mobile' => $payment['mobile'],
             'address' => $payment['address'],
         ]);
+
         foreach ($this->cart as $pro) {
+
+            // dd($pro);
 
             $currentorder->details()->create([
                 'product_id' => $pro['id'],
+                'variation_id' => $pro['variation_details']['id'],
                 'price' => $pro['price'],
                 'total' => $pro['total'],
                 'quentity' => $pro['quentity'],
             ]);
+
+            $stock = Stock::where('product_id', $pro['id'])->first();
+
+            if (!empty($pro['variation_details'])) {
+                $this->Order_variation_stock_reduce($pro['variation_details']['id'], $pro['quentity']);
+
+                $stock->variation_stock = $stock->variation_stock - $pro['quentity'];
+                $stock->save();
+            } else {
+                $stock->stock = $stock->stock - $pro['quentity'];
+                $stock->save();
+            }
+
+            if (!empty($this->coupane)) {
+                if (
+                    !empty($this->coupane->user_id)
+                    || !empty($this->coupane->coin)
+                ) {
+                    $this->shopping_with_Coin = true;
+                }
+
+                userordercoupane::create([
+                    'user_id' => $currentUser,
+                    'order_id' => $currentorder->id,
+                    'coupane_id' => $this->coupane->id,
+                    'purches_with_coin_status' => $this->shopping_with_Coin,
+
+                ]);
+            }
         }
+
         $this->mount();
         if (session()->has('cart')) {
             session()->forget(['cart']);
             $this->reset();
         }
-        return redirect()->route('front.dashboard');
+        return redirect()->route('user.dashboard');
     }
+
+    public function Order_variation_stock_reduce($variation_id, $quentity)
+    {
+        $variation = Variation::findOrFail($variation_id);
+        $variation->stock = $variation->stock - $quentity;
+        $variation->save();
+    }
+
 
 
 
@@ -244,9 +301,10 @@ class Cart extends Component
     }
 
 
-    public function coupaneActive($discount)
+    public function coupaneActive($discount, $coupane_id)
     {
         $this->discount = $discount;
+        $this->coupane = Coupane::findOrFail($coupane_id);
         $this->cart = session()->get('cart');
         // $this->grandTotal = collect($this->cart)->pluck('total')->sum() - $this->discount;
         $this->grandTotal = $this->clculateGrandtotal();

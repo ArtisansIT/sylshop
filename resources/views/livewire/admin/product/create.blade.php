@@ -1,7 +1,7 @@
 <div>
     {{-- <div wire:loading wire:target="submitForm" class="loader"></div> --}}
     <div class="row">
-        <div class="col-md-10 offset-md-1 col-sm-12 col-xs-12">
+       <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <h4 class="text-danger mt-3">Product Section</h4>

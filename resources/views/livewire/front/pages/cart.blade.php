@@ -204,7 +204,11 @@
 <script>
     
 
-    window.livewire.on('overUpdateCartQuentity', (param) => {
+window.livewire.on('overUpdateCartQuentity', (param) => {
+    toastr[param['type']](param['message'],param['type']);
+  
+});
+window.livewire.on('on_address_no_pickup', (param) => {
     toastr[param['type']](param['message'],param['type']);
   
 });
@@ -213,15 +217,4 @@
     })
 
 </script>
-{{-- <script>
-    
-        window.livewire.on('updateQTY', id =>{
-            let qty = parseFloat(document.getElementById("qty_"+ id).value);
-            window.livewire.emit('updateQuentity', id , qty);
-        })
-
-
-</script> --}}
-
-
 @endpush

@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Admin\Order;
+use App\Admin\Coupane;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -47,5 +48,10 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
+    }
+
+    public function coupanes()
+    {
+        return $this->hasMany(Coupane::class);
     }
 }
