@@ -28,7 +28,7 @@ class subcategoryController extends Controller
             $subcategory->status = true;
             $subcategory->save();
             $subcategory->image()->create([
-                'url' => $this->categoryRepositories->resizeImage($request, 200, 100, 'subcategory'),
+                'url' => $this->categoryRepositories->resizeImage($request, 200, 100, 'subcategory', 'image'),
             ]);
 
             return redirect()->back();
@@ -46,7 +46,7 @@ class subcategoryController extends Controller
             ]);
             \File::delete('images/' . $subcategory->image->url);
             $subcategory->image()->update([
-                'url' => $this->categoryRepositories->resizeImage($request, 200, 100, 'subcategory'),
+                'url' => $this->categoryRepositories->resizeImage($request, 200, 100, 'subcategory', 'image'),
             ]);
 
             return redirect()->back();
