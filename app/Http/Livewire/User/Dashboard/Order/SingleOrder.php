@@ -24,6 +24,7 @@ class SingleOrder extends Component
     {
 
         $this->order = $singleOrder;
+        // dd($this->order);
         $this->currentComponent = $currentComponent;
         $this->comment_page = false;
         // dd($this->order);
@@ -33,9 +34,10 @@ class SingleOrder extends Component
         return view('livewire.user.dashboard.order.single-order');
     }
 
-    public function backToPendingPage()
+    public function back()
     {
-        $this->emit('back', $this->currentComponent);
+        $this->emit('backTo_single_order');
+        // $this->mount($this->order, $this->currentComponent);
     }
     public function go_commentpage($product)
     {

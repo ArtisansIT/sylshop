@@ -80,6 +80,7 @@ class SmallCartView extends Component
         if (session()->has('variation')) {
 
             $variation = session()->get('variation');
+
             $cart[$product]['variation_details'] = $variation;
 
             if (!empty($variation['offer_price'])) {
@@ -88,8 +89,10 @@ class SmallCartView extends Component
                 $cart[$product]['price'] =  $variation['offer_price'];
             } else {
 
-                $price = $variation['main_price'];
-                $cart[$product]['price'] =  $variation['main_price'];
+                $price = $variation['sale_price'];
+
+
+                $cart[$product]['price'] =  $variation['sale_price'];
             }
         } else {
             $cart[$product]['variation_details'] = null;

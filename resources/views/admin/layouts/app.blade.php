@@ -17,6 +17,7 @@
     <!-- Custom style CSS -->
     {{-- <link rel="stylesheet" href="{{ asset('admin/assets/bundles/prism/prism.css') }}"> --}}
     <link rel='shortcut icon' type='image/x-icon' href='{{ asset('admin/assets/img/favicon.ico') }}' />
+    <script src="https://js.pusher.com/6.0/pusher.min.js"></script>
 
     @section('header')
 
@@ -35,6 +36,10 @@
             @if (auth()->check() && auth()->user()->role_id == 1)
                 
             @include('admin/partials/headerForUserNotAdmin')
+          
+            @elseif (auth()->check() && auth()->user()->role_id == 3)
+                
+            @include('admin/partials/headerForShopNotAdmin')
             @else
                 
             @include('admin/partials/header')

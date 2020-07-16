@@ -2,8 +2,9 @@
 
 namespace App\Admin;
 
-use Illuminate\Database\Eloquent\Builder;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 
 class Order extends Model
@@ -20,6 +21,14 @@ class Order extends Model
     public function pickup()
     {
         return $this->belongsTo(Pickup::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function coupane()
+    {
+        return $this->belongsTo(Coupane::class);
     }
     public function payment()
     {

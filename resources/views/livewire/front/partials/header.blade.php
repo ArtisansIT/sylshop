@@ -29,7 +29,9 @@
                                 @auth
                                     @if(auth()->user()->role_id == 2)
                                         <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                                        @else
+                                        @elseif(auth()->user()->role_id == 3)
+                                        <li><a href="{{ route('shop.dashboard') }}">Dashboard</a></li>
+                                        @else 
                                         <li><a href="{{ route('user.dashboard') }}">Dashboard</a></li>
                                         @endif
                                     @else 

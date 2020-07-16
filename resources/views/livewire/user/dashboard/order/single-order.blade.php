@@ -85,7 +85,7 @@
                                 <td class="text-center">TK. {{ $product->price }}</td>
                                 <td class="text-center">{{ $product->quentity }}</td>
                                 <td class="text-right">Tk {{ $product->total }}</td>
-                                @if ($currentComponent == 'DeliveredOder')
+                                @if ($currentComponent == 'delivered')
                                 <td class="text-right">
                                     @if ( $product->comment == false)
                                     <button
@@ -156,7 +156,7 @@
             </div>
             {{-- <button class="btn btn-warning btn-icon icon-left"><i class="fas fa-print"></i> Print</button> --}}
              <button 
-                 wire:click="backToPendingPage"
+                 wire:click="back"
                 class="btn btn-danger btn-icon icon-left">
                   <i class="fas fa-times"></i> Back</button>
         </div>

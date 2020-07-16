@@ -18,9 +18,7 @@ class AdminMiddleware
     {
         if (Auth::check() && Auth::user()->role_id == 2) {
             return $next($request);
-        }
-        else
-        {
+        } else {
             return redirect()->route('login');
         }
     }

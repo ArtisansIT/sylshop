@@ -2,14 +2,15 @@
 
 namespace App\Http\Livewire\Front\Pages;
 
-use App\Admin\Coupane;
 use App\Admin\Order;
+use App\Admin\Stock;
+use App\Admin\Coupane;
 use App\Admin\Payment;
 use App\Admin\Product;
-use App\Admin\Stock;
-use App\Admin\userordercoupane;
-use App\Admin\Variation;
 use Livewire\Component;
+use App\Admin\Variation;
+use App\Events\OrderEvent;
+use App\Admin\userordercoupane;
 
 
 class Cart extends Component
@@ -214,12 +215,13 @@ class Cart extends Component
             'address' => $payment['address'],
         ]);
 
+
         foreach ($this->cart as $pro) {
 
-            // dd($pro);
 
             $currentorder->details()->create([
                 'product_id' => $pro['id'],
+                'shop_id' => $pro['shop_id'],
                 'variation_id' => $pro['variation_details']['id'],
                 'price' => $pro['price'],
                 'total' => $pro['total'],
@@ -255,6 +257,8 @@ class Cart extends Component
                 ]);
             }
         }
+
+        event(new OrderEvent($currentorder));
 
         $this->mount();
         if (session()->has('cart')) {

@@ -23,6 +23,8 @@ class RedirectIfAuthenticated
             // return redirect(RouteServiceProvider::HOME);
         } elseif (Auth::guard($guard)->check() && Auth::user()->role_id == 2) {
             return redirect()->route('admin.dashboard');
+        } elseif (Auth::guard($guard)->check() && Auth::user()->role_id == 3 && !empty(Auth::user()->shop_id)) {
+            return redirect()->route('shop.dashboard');
         } else {
 
             return $next($request);

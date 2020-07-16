@@ -181,13 +181,15 @@ class Create extends Component
             'short_description' => 'required',
             'link' => 'required',
             'ship_return' => 'required',
-            'offer_price' => 'required',
+            // 'offer_price' => 'required',
             'serch_tag' => 'required',
         ]);
 
 
+        $pro_code = time();
         $this->fullProduct =  Product::create([
             'name' => $this->name,
+            'code' => $pro_code,
             'main_price' => $this->main_price,
             'offer_price' => $this->offer_price,
             'category_id' => $this->category,
@@ -536,7 +538,6 @@ class Create extends Component
         $this->validate([
             'name' => 'required',
             'main_price' => 'required',
-            'offer_price' => 'required',
             'stock' => 'required',
         ]);
 

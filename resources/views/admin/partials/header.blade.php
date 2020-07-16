@@ -71,7 +71,8 @@
               <a href="{{ route('admin.coupane_with_user') }}" class="nav-link"><i data-feather="monitor"></i><span>User & Coupane</span></a>
               <a href="{{ route('admin.pickup') }}" class="nav-link"><i data-feather="monitor"></i><span>Pick Up</span></a>
               <a href="{{ route('admin.payment') }}" class="nav-link"><i data-feather="monitor"></i><span>Payment</span></a>
-              <a href="{{ route('admin.all_order') }}" class="nav-link"><i data-feather="monitor"></i><span>All Order</span></a>
+              {{-- <a href="{{ route('admin.all_order') }}" class="nav-link"><i data-feather="monitor"></i><span>All Order</span></a> --}}
+              <a href="{{ route('admin.order_section') }}" class="nav-link"><i data-feather="monitor"></i><span>Order Section</span></a>
               <a href="{{ route('admin.citems') }}" class="nav-link"><i data-feather="monitor"></i><span>Comment Items</span></a>
             </li>
             <li class="dropdown">
@@ -85,3 +86,7 @@
           </ul>
         </aside>
       </div>
+
+      $this->orders = Order::with('details')->whereHas('details', function ($query) {
+    $query->where('pending', true);
+})->get();

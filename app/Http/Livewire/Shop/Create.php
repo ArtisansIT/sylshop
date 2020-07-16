@@ -2,11 +2,12 @@
 
 namespace App\Http\Livewire\Shop;
 
+use App\User;
 use App\Admin\Shop;
 use App\Admin\Product;
 use App\Admin\Category;
-use App\Admin\Subcategory;
 use Livewire\Component;
+use App\Admin\Subcategory;
 
 class Create extends Component
 {
@@ -35,6 +36,18 @@ class Create extends Component
     public $image;
     public $banner;
     public $status;
+
+
+    public $licence;
+    public $boss_name;
+    public $phone;
+    public $email;
+    public $boss_address;
+    public $boss_nid;
+    public $bank_account_name;
+    public $bank_account_number;
+    public $bank_name;
+    public $password;
 
 
     public $currentShop;
@@ -86,18 +99,46 @@ class Create extends Component
             'category' => 'required',
             'address' => 'required',
             'link' => 'required',
-            'about' => 'required',
+            'email' => 'required|unique:users',
+            // 'about' => 'required',
             'shipping' => 'required',
+            'boss_name' => 'required',
+            'phone' => 'required|numeric|regex:/(01)[0-9]{9}/|unique:users',
+            'boss_address' => 'required',
+            'boss_nid' => 'required',
+            'password' => 'required',
+
         ]);
 
         $this->currentShop = Shop::create([
             'name' => $this->name,
+            'licence' => $this->licence,
             'category_id' => $this->category,
             'address' => $this->address,
             'link' => $this->link,
-            'about' => $this->about,
             'shipping' => $this->shipping,
+            'boss_name' => $this->boss_name,
+            'phone' => $this->phone,
+            'email' => $this->email,
+            'boss_address' => $this->boss_address,
+            'boss_nid' => $this->boss_nid,
+            'bank_account_name' => $this->bank_account_name,
+            'bank_account_number' => $this->bank_account_number,
+            'bank_name' => $this->bank_name,
         ]);
+        // dd($this->currentShop->id);
+
+        User::create([
+            'name' => $this->name,
+            'password' => $this->password,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'shop_id' => $this->currentShop['id'],
+            'role_id' => 3,
+
+        ]);
+
+
 
         $this->shopid = $this->currentShop->id;
 

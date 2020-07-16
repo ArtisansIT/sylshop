@@ -4,6 +4,7 @@ namespace App\Admin;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
@@ -63,7 +64,12 @@ class Product extends Model
     }
 
 
-
+    public function setOfferPriceAttribute($value)
+    {
+        if ($value == null) {
+            $this->attributes['offer_price'] = 0;
+        }
+    }
 
 
     public function variations()
@@ -84,6 +90,20 @@ class Product extends Model
             $data = floor((($this->main_price - $this->offer_price) / $this->main_price)  * 100);
             return $data;
         }
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope('shop_products', function (Builder $builder) {
+            if (
+                auth()->check() &&
+                auth()->user()->role_id == 3 &&
+                !empty(auth()->user()->shop_id)
+            ) {
+                return $builder->where('shop_id', auth()->user()->shop_id);
+            }
+        });
     }
 
 

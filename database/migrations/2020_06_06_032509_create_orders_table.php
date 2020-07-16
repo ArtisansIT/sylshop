@@ -17,21 +17,18 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->index();
             $table->unsignedBigInteger('payment_id')->index();
-            $table->unsignedBigInteger('pickup_id')->index();
+            $table->unsignedBigInteger('pickup_id')->index()->nullable();
+            $table->unsignedBigInteger('coupane_id')->index()->nullable();
             $table->string('code');
             $table->integer('shipping');
             $table->integer('discount')->nullable();
             $table->string('name');
             $table->string('mobile');
-            $table->text('address');
-            $table->boolean('pending')->default(true);
-            $table->boolean('confirmed')->default(false);
-            $table->boolean('processing')->default(false);
-            $table->boolean('picked')->default(false);
-            $table->boolean('delivered')->default(false);
+            $table->text('address')->nullable();
             $table->foreign('payment_id')->references('id')->on('payments')->cascadeOnDelete();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('pickup_id')->references('id')->on('pickups');
+            $table->foreign('coupane_id')->references('id')->on('coupanes');
             $table->timestamps();
         });
     }

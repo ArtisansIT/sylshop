@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Admin\Shop;
 use App\Admin\Order;
 use App\Admin\Coupane;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id', 'phone'
+        'name', 'email', 'password', 'role_id', 'phone', 'shop_id'
     ];
 
     /**
@@ -53,5 +54,10 @@ class User extends Authenticatable
     public function coupanes()
     {
         return $this->hasMany(Coupane::class);
+    }
+
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
     }
 }

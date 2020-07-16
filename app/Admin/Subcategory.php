@@ -4,6 +4,7 @@ namespace App\Admin;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Subcategory extends Model
@@ -52,6 +53,16 @@ class Subcategory extends Model
         });
         static::restoring(function ($offer) {
             $offer->products()->onlyTrashed()->restore();
+        });
+
+        static::addGlobalScope('shop_subcategory', function (Builder $builder) {
+            if (
+                auth()->check() &&
+                auth()->user()->role_id == 3 &&
+                !empty(auth()->user()->shop_id)
+            ) {
+                return $builder->where('shop_id', auth()->user()->shop_id);
+            }
         });
     }
 }

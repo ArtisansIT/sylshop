@@ -1,6 +1,7 @@
 <div>
+        <div class="card-body">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 ">
             <div class="card">
                 <div class="card-header">
 
@@ -40,14 +41,14 @@
 
                             <div class="card-header">
                                 <h4>
-                            <span>
+                                    <span>
 
-                                All products
-                            </span>
+                                        All products
+                                    </span>
 
-                            <span class="badge badge-danger headerBadge1">
-                                {{ $orders->count() }}</span>
-                        </h4>
+                                    <span class="badge badge-danger headerBadge1">
+                                        {{ $orders->count() }}</span>
+                                </h4>
                                 <div class="card-header-form">
                                     <form>
                                         <div class="input-group">
@@ -72,6 +73,8 @@
                                             <th> processing</th>
                                             <th> picked</th>
                                             <th> delivered</th>
+                                            <th> Details</th>
+                                            <th> Cencel Order</th>
 
                                         </tr>
 
@@ -79,68 +82,74 @@
 
                                         @foreach ($singleorder as $order)
                                         <tr>
-                                                
-                                            
-                                          
+
+
+
                                             <td>
                                                 <span>{{ $order->code }}</span>
 
                                             </td>
                                             <td>{{ $order->created_at->diffForHumans() }}</td>
-                                             <td class="p-0 text-center">
+                                            <td class="p-0 text-center">
                                                 <div class="custom-checkbox custom-control">
                                                     <input type="checkbox" data-checkboxes="mygroup"
-                                                      
-                                                      @if(!empty($order->pending == true)) checked @endif
+                                                        @if(!empty($order->pending == true)) checked @endif
 
                                                     class="custom-control-input" id="checkbox-{{ $order->id }}">
                                                     <label for="checkbox-{{ $order->id }}"
                                                         class="custom-control-label">&nbsp;</label>
                                                 </div>
                                             </td>
-                                             <td class="p-0 text-center">
+                                            <td class="p-0 text-center">
                                                 <div class="custom-checkbox custom-control">
                                                     <input type="checkbox" data-checkboxes="mygroup"
-                                                        wire:change="confirmed({{$order->id  }})" 
-                                                        @if ($order->confirmed == true) checked @endif
+                                                        wire:change="confirmed({{$order->id  }})" @if ($order->confirmed
+                                                    == true) checked @endif
 
                                                     class="custom-control-input" id="confirmed-{{ $order->id }}">
                                                     <label for="confirmed-{{ $order->id }}"
                                                         class="custom-control-label">&nbsp;</label>
                                                 </div>
                                             </td>
-                                             <td class="p-0 text-center">
+                                            <td class="p-0 text-center">
                                                 <div class="custom-checkbox custom-control">
                                                     <input type="checkbox" data-checkboxes="mygroup"
                                                         wire:change="processing({{$order->id  }})" 
-                                                        @if ($order->processing == true) checked @endif
+                                                       @if ($order->processing == true) checked @endif
 
                                                     class="custom-control-input" id="processing-{{ $order->id }}">
                                                     <label for="processing-{{ $order->id }}"
                                                         class="custom-control-label">&nbsp;</label>
                                                 </div>
                                             </td>
-                                             <td class="p-0 text-center">
+                                            <td class="p-0 text-center">
                                                 <div class="custom-checkbox custom-control">
                                                     <input type="checkbox" data-checkboxes="mygroup"
-                                                        wire:change="picked({{$order->id  }})" 
-                                                        @if ($order->picked == true) checked @endif
+                                                        wire:change="picked({{$order->id  }})" @if ($order->picked ==
+                                                    true) checked @endif
 
                                                     class="custom-control-input" id="picked-{{ $order->id }}">
                                                     <label for="picked-{{ $order->id }}"
                                                         class="custom-control-label">&nbsp;</label>
                                                 </div>
                                             </td>
-                                             <td class="p-0 text-center">
+                                            <td class="p-0 text-center">
                                                 <div class="custom-checkbox custom-control">
                                                     <input type="checkbox" data-checkboxes="mygroup"
-                                                        wire:change="delivered({{$order->id  }})" 
-                                                        @if ($order->delivered == true) checked @endif
+                                                        wire:change="delivered({{$order->id  }})" @if ($order->delivered
+                                                    == true) checked @endif
 
                                                     class="custom-control-input" id="delivered-{{ $order->id }}">
                                                     <label for="delivered-{{ $order->id }}"
                                                         class="custom-control-label">&nbsp;</label>
                                                 </div>
+                                            </td>
+                                              <td><button class="btn btn-primary"
+                                            wire:click="ViewsingleOrder({{ $order->id }})">Details</button></td>
+                                            <td>
+                                                <button wire:click="deleteOrder({{ $order->id }})"
+                                                    class="btn btn-danger btn-icon icon-left">
+                                                    <i class="fas fa-times"></i> Delete Order</button>
                                             </td>
 
 
@@ -151,7 +160,7 @@
                                         @endforeach
 
                                     </table>
-                                  
+
                                 </div>
                             </div>
 
@@ -162,12 +171,18 @@
                 @include('livewire.admin.category.image-update')
                 @elseif($go_edit_category_page == true)
                 @include('livewire.admin.category.edit-category') --}}
-                @elseif($goto_Delevered_page == true)
-                @livewire('admin.order.delevered')
-                {{-- @elseif($go_all_category_page == true)
+                    @elseif($goto_Delevered_page == true)
+                    @livewire('admin.order.delevered');
+                    @elseif($go_single_order_page == true)
+                    @livewire('admin.order.single-order',['singleOrder' => $single_order_variable ,
+                     'currentComponent' => $currentComponent,
+                    
+                    ]);
+                    {{-- @elseif($go_all_category_page == true)
                 @livewire('admin.category.all-category') --}}
-                @endif
+                    @endif
                 </div>
             </div>
 
+        </div>
         </div>

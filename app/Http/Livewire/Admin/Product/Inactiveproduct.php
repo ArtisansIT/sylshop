@@ -14,9 +14,6 @@ class Inactiveproduct extends Component
         return view('livewire.admin.product.inactiveproduct', [
 
             'products' => $this->search === null ?
-                // Subcategory::where('status', true)->onlyTrashed()->get() :
-                // Subcategory::where('name', 'like', '%' . $this->search . '%')->onlyTrashed()->get()
-
                 Product::where([
 
                     ['status', true],

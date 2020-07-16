@@ -55,6 +55,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'layout' => 'admin.layouts.
     Route::livewire('citems', 'admin.citems.create')->name('citems');
     Route::livewire('coupane-with-user', 'admin.userwithcoupane.users')->name('coupane_with_user');
     Route::livewire('all-order', 'admin.order.all-order')->name('all_order');
+    Route::livewire('order_section', 'admin.ordersection.index')->name('order_section');
 });
 
 
@@ -67,6 +68,17 @@ Route::group(['layout' => 'admin.layouts.app', 'as' => 'user.', 'section' => 'ma
 
     Route::livewire('/user/dashboard', 'user.dashboard.home')->name('dashboard');
     Route::livewire('/all-orders', 'user.dashboard.order.all-orders')->name('all_orders');
+    Route::livewire('/order-processing', 'user.dashboard.ordersection.order-processing')->name('order_processing');
+});
+Route::group(['layout' => 'admin.layouts.app', 'as' => 'shop.', 'section' => 'mainContent', 'middleware' => ['auth', 'shop']], function () {
+
+
+
+    Route::livewire('/shop/dashboard', 'shopsection.pages.dashboard')->name('dashboard');
+    Route::livewire('/shop/all-product', 'shopsection.product.all-product')->name('all_product');
+    // Route::livewire('/shop/all-product', 'shopsection.product.all-product')->name('all_product');
+    Route::livewire('/shop/subcategory', 'shopsection.subcategory.create')->name('subcategory');
+    Route::livewire('/shop/product-section', 'shopsection.product.create')->name('product_section');
 });
 
 

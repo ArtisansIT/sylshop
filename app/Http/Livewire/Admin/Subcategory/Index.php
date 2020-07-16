@@ -34,10 +34,9 @@ class Index extends Component
 
     public function edit($subcategory)
     {
-
-
         $this->emit('edit', $subcategory);
     }
+
 
     public function softDelete_subcategory($subcategory)
     {

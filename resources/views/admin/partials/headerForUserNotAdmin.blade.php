@@ -63,7 +63,8 @@
               <a href="{{ route('login') }}" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
             </li>
             <li class="dropdown active">
-              <a href="{{ route('user.all_orders') }}" class="nav-link"><i data-feather="monitor"></i><span>All Orders</span></a>
+              {{-- <a href="{{ route('user.all_orders') }}" class="nav-link"><i data-feather="monitor"></i><span>All Orders</span></a> --}}
+              <a href="{{ route('user.order_processing') }}" class="nav-link"><i data-feather="monitor"></i><span>Orders Processing</span></a>
              
             </li>
             <li class="dropdown">
