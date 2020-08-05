@@ -13,6 +13,11 @@ class ViewAllShop extends Component
     public $updateMode;
     public $imageUpdateMode;
 
+    public $view_all_shop,
+        $edit_a_shop;
+
+    public $shop_id;
+
 
 
     public $categorys;
@@ -30,9 +35,15 @@ class ViewAllShop extends Component
 
     public $image_select_id;
 
+    protected $listeners = [
+        'backToAllShop',
+    ];
+
     public function mount()
     {
         $this->search = request()->query('search', $this->search);
+        $this->view_all_shop = true;
+        $this->edit_a_shop = true;
     }
 
 
@@ -61,7 +72,9 @@ class ViewAllShop extends Component
 
     public function editShop($shop)
     {
-        $this->emit('editShop', $shop);
+        $this->shop_id = $shop;
+        $this->view_all_shop = false;
+        $this->edit_a_shop = true;
     }
 
     public function bannerUpdate($shop)
@@ -83,5 +96,11 @@ class ViewAllShop extends Component
     public function pendingImage($shop)
     {
         $this->emit('pendingImage', $shop);
+    }
+
+    public function backToAllShop()
+    {
+        $this->view_all_shop = true;
+        $this->edit_a_shop = false;
     }
 }

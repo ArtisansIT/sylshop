@@ -15,14 +15,15 @@ class Inactiveproduct extends Component
             'livewire.shopsection.product.inactiveproduct',
             [
 
+
                 'products' => $this->search === null ?
-                    Product::where([
-                        ['status', true],
-                    ])->onlyTrashed()->get() :
-                    Product::Where([
+                    Product::with('subcategory')->where([
+                        ['status', false],
+                    ])->get() :
+                    Product::with('subcategory')->Where([
                         ['name', 'like', '%' . $this->search . '%'],
-                        ['status', true],
-                    ])->onlyTrashed()->get()
+                        ['status', false],
+                    ])->get()
 
             ]
         );

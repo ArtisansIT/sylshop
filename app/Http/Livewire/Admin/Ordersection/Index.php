@@ -21,8 +21,10 @@ class Index extends Component
     public $OrderDetails_for_SingleOrder;
     public $OrderCode_for_SingleOrder;
     public $page_name_variable_singleOrder_page;
-    public $product_details_variable;
-    public $product_variation_variable;
+    public $product_details_variable,
+        $product_variation_variable,
+        $variable_for_back_to_index_page;
+
 
 
 
@@ -39,15 +41,13 @@ class Index extends Component
     ];
     public function mount()
     {
-        $this->page_name_variable_singleOrder_page = 'newOrder';
+        $this->page_name_variable_singleOrder_page = 'pending';
         $this->singleOrderPage = false;
         $this->singleOrder_DetailsPage = false;
         $this->single_product_page = false;
         $this->indexComponent = true;
         $this->orders =
-            Order::with(['details' => function ($query) {
-                $query->where('pending', true);
-            }])->whereHas('details', function ($query) {
+            Order::whereHas('details', function ($query) {
                 $query->where('pending', true);
             })->latest()->get();
     }
@@ -62,101 +62,81 @@ class Index extends Component
     }
     public function newOrder()
     {
-        $this->page_name_variable_singleOrder_page = 'newOrder';
+        $this->page_name_variable_singleOrder_page = 'pending';
         $this->orders =
-            Order::with(['details' => function ($query) {
-                $query->where('pending', true);
-            }])->whereHas('details', function ($query) {
+            Order::whereHas('details', function ($query) {
                 $query->where('pending', true);
             })->latest()->get();
     }
     public function chack()
     {
-        $this->page_name_variable_singleOrder_page = 'chack';
+        $this->page_name_variable_singleOrder_page = 'check';
         $this->orders =
-            Order::with(['details' => function ($query) {
-                $query->where('check', true);
-            }])->whereHas('details', function ($query) {
+            Order::whereHas('details', function ($query) {
                 $query->where('check', true);
             })->latest()->get();
     }
     public function Received()
     {
-        $this->page_name_variable_singleOrder_page = 'Received';
+        $this->page_name_variable_singleOrder_page = 'received';
         $this->orders =
-            Order::with(['details' => function ($query) {
-                $query->where('received', true);
-            }])->whereHas('details', function ($query) {
+            Order::whereHas('details', function ($query) {
                 $query->where('received', true);
             })->latest()->get();
     }
     public function Packing()
     {
-        $this->page_name_variable_singleOrder_page = 'Packing';
+        $this->page_name_variable_singleOrder_page = 'packing';
         $this->orders =
-            Order::with(['details' => function ($query) {
-                $query->where('packing', true);
-            }])->whereHas('details', function ($query) {
+            Order::whereHas('details', function ($query) {
                 $query->where('packing', true);
             })->latest()->get();
     }
     public function Shipped()
     {
-        $this->page_name_variable_singleOrder_page = 'Shipped';
+        $this->page_name_variable_singleOrder_page = 'shipped';
         $this->orders =
-            Order::with(['details' => function ($query) {
-                $query->where('shipped', true);
-            }])->whereHas('details', function ($query) {
+            Order::whereHas('details', function ($query) {
                 $query->where('shipped', true);
             })->latest()->get();
     }
     public function Piked()
     {
-        $this->page_name_variable_singleOrder_page = 'Piked';
+        $this->page_name_variable_singleOrder_page = 'piked';
         $this->orders =
-            Order::with(['details' => function ($query) {
-                $query->where('piked', true);
-            }])->whereHas('details', function ($query) {
+            Order::whereHas('details', function ($query) {
                 $query->where('piked', true);
             })->latest()->get();
     }
     public function Delivered()
     {
-        $this->page_name_variable_singleOrder_page = 'Delivered';
+        $this->page_name_variable_singleOrder_page = 'delivered';
         $this->orders =
-            Order::with(['details' => function ($query) {
-                $query->where('delivered', true);
-            }])->whereHas('details', function ($query) {
+            Order::whereHas('details', function ($query) {
                 $query->where('delivered', true);
             })->latest()->get();
     }
     public function Return()
     {
-        $this->page_name_variable_singleOrder_page = 'Return';
+        $this->page_name_variable_singleOrder_page = 'return';
         $this->orders =
-            Order::with(['details' => function ($query) {
-                $query->where('return', true);
-            }])->whereHas('details', function ($query) {
+            Order::whereHas('details', function ($query) {
                 $query->where('return', true);
             })->latest()->get();
     }
     public function Return_Received()
     {
-        $this->page_name_variable_singleOrder_page = 'Return_Received';
+        $this->page_name_variable_singleOrder_page = 'return_Received';
         $this->orders =
-            Order::with(['details' => function ($query) {
-                $query->where('return_received', true);
-            }])->whereHas('details', function ($query) {
+            Order::whereHas('details', function ($query) {
                 $query->where('return_received', true);
             })->latest()->get();
     }
     public function ReturnHandhover()
     {
-        $this->page_name_variable_singleOrder_page = 'ReturnHandhover';
+        $this->page_name_variable_singleOrder_page = 'handover';
         $this->orders =
-            Order::with(['details' => function ($query) {
-                $query->where('handover', true);
-            }])->whereHas('details', function ($query) {
+            Order::whereHas('details', function ($query) {
                 $query->where('handover', true);
             })->latest()->get();
     }
@@ -164,9 +144,7 @@ class Index extends Component
     {
         $this->page_name_variable_singleOrder_page = 'Cancel';
         $this->orders =
-            Order::with(['details' => function ($query) {
-                $query->where('cancel', true);
-            }])->whereHas('details', function ($query) {
+            Order::whereHas('details', function ($query) {
                 $query->where('cancel', true);
             })->latest()->get();
     }
@@ -176,7 +154,7 @@ class Index extends Component
         $this->orders =
             Order::with(['details' => function ($query) {
                 $query->where('shopCancel', true);
-            }])->whereHas('details', function ($query) {
+            }, 'details.process'])->whereHas('details', function ($query) {
                 $query->where('shopCancel', true);
             })->latest()->get();
     }
@@ -230,8 +208,13 @@ class Index extends Component
 
     public function go_single_product($product, $variation)
     {
-        $this->product_details_variable = Product::with('image')->findOrFail($product);
+        $this->product_details_variable = Product::with(
+            'image',
+            'category',
+            'subcategory'
+        )->findOrFail($product);
         $this->product_variation_variable = $variation;
+        $this->variable_for_back_to_index_page = 'admin_order_page';
         // dd($this->product_details_variable);
         $this->indexComponent = false;
         $this->single_product_page = true;

@@ -9,7 +9,7 @@
      @else
 
      <span class="new-price">TK.{{ $product->offer_price }}</span>
-     <span class="old-price">Was TK{{ $product->main_price  }}</span>
+     <span class="old-price"> TK{{ $product->main_price  }}</span>
      @endif
  </div>
 {{-- 
@@ -29,7 +29,9 @@
 
  <div class="product-content">
      <p>
-         {{$product->short_description  }}
+         {{-- {{$product->short_description  }} --}}
+         {{-- {!! htmlspecialchars_decode( ) !!} --}}
+         {!! nl2br(e($product->short_description)) !!}
      </p>
  </div>
  <div>
@@ -46,7 +48,7 @@
              </select>
          </div><!-- End .select-custom -->
 
-         <a href="#" class="size-guide"><i class="icon-th-list"></i>View 400</a>
+         <a href="#" class="size-guide"><i class="icon-th-list"></i>View {{ $product->view }}</a>
 
      </div><!-- End .details-filter-row -->
  </div>

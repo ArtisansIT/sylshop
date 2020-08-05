@@ -72,7 +72,7 @@ class OrderProcessing extends Component
             $this->orderProceingPage = false;
             $this->singleOrderPage = true;
         } elseif ($page == 'confirmed') {
-            $this->current_page_sstatus = 'confirmed';
+            $this->current_page_sstatus = 'check';
             $this->sigleOrderValue =   $this->confirmed;
             $this->orderProceingPage = false;
             $this->singleOrderPage = true;

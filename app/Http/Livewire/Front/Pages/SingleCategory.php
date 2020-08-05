@@ -11,10 +11,19 @@ class SingleCategory extends Component
 
     public $categorys;
 
-    public function mount(Category $category)
+    public function mount($category)
     {
+
         // $data = Category::findOrFail($category);
-        $this->categorys = $category;
+        $this->categorys  = Category::with(
+            [
+                'products' => function ($q) {
+                    $q->inRandomOrder()->get();
+                },
+                'products.image'
+            ],
+        )->findOrFail($category);
+        // $this->categorys = $category;
     }
     public function render()
     {

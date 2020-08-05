@@ -36,7 +36,7 @@
                             <table class="table table-striped">
                                 <tr>
                                     <th>Today Offer</th>
-                                    {{-- <th> Name</th> --}}
+                                    <th> View</th>
                                     <th> Name</th>
                                     <th>Code </th>
                                     <th>Category</th>
@@ -44,6 +44,7 @@
                                     <th>Stock </th>
                                     <th>Discount Rate </th>
                                     <th>Variation </th>
+                                    <th>Create </th>
                                     <th>Actions</th>
                                 </tr>
                                 @foreach($products as $product)
@@ -60,6 +61,11 @@
                                             <label for="checkbox-{{ $product->id }}"
                                                 class="custom-control-label">&nbsp;</label>
                                         </div>
+                                    </td>
+                                    <td>
+                                         <button type="button" class="btn btn-sm btn-dark mr-1"
+                                                wire:click="$emit('viewProduct' , {{ $product->id  }})">View
+                                            </button>
                                     </td>
                                     <td>{{ isset($product->name) ? $product->name : '' }}</td>
                                     <td>{{ isset($product->code) ? $product->code : '' }}</td>
@@ -79,28 +85,31 @@
                                                
                                         </p>
                                     </td>
+                                    <td>
+                                        {{ $product->updated_at->diffForHumans() }}
+                                    </td>
 
 
                                 
                                     <td>
-                                        <div class="btn-group mb-3 btn-group-sm" role="group"
+                                        <div class="btn-group mb-1 btn-group-sm" role="group"
                                             aria-label="Basic example">
-                                            <button type="button" class="btn btn-dark m-1"
+                                            <button type="button" class="btn btn-sm btn-dark mr-1"
                                                  wire:click="allVariation({{ $product->id }})">Variation
                                             </button>
-                                            <button type="button" class="btn btn-primary m-1"
+                                            <button type="button" class="btn btn-sm btn-primary mr-1"
                                                 wire:click="edit_product({{ $product->id }})">Edit
                                             </button>
-                                            <button type="button" class="btn btn-success m-1"
+                                            <button type="button" class="btn btn-sm btn-success mr-1"
                                                 wire:click="see_all_image({{ $product->id }})">Images
                                             </button>
-                                            <button type="button" class="btn btn-warning m-1"
+                                            <button type="button" class="btn btn-sm btn-warning mr-1"
                                                 wire:click="go_and_update_stock({{ $product->id }})">stock
                                             </button>
-                                            <button type="button" class="btn btn-dark m-1"
+                                            <button type="button" class="btn btn-sm btn-dark mr-1"
                                                 wire:click="go_and_update_variation_stock({{ $product->id }})">Variation Stock
                                             </button>
-                                            <button type="button" class="btn btn-danger m-1"
+                                            <button type="button" class="btn btn-sm btn-danger mr-1"
                                                 onclick="confirm('Are you want To delete') || event.stopImmediatePropagation()"
                                                 wire:click="softDelete_product({{ $product->id }})">Delete
                                             </button>

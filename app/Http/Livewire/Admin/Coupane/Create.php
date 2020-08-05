@@ -12,6 +12,20 @@ class Create extends Component
     public $go_subCategory;
     public $go_shop;
     public $go_user;
+
+
+
+
+    public $category_all_page,
+        $category_edit_page,
+        $subcateogry_all_page,
+        $subcateogry_edit_page,
+        $shop_all_page,
+        $shop_edit_page,
+        $user_all_page,
+        $user_edit_page;
+
+
     public $all_caoupane;
     public $show_navigation;
 
@@ -29,6 +43,10 @@ class Create extends Component
         $this->go_user = false;
         $this->all_caoupane = false;
         $this->show_navigation = false;
+        $this->category_all_page = false;
+        $this->subcateogry_all_page = false;
+        $this->shop_all_page = false;
+        $this->user_all_page = false;
     }
 
     public function pageReset()
@@ -39,6 +57,10 @@ class Create extends Component
         $this->go_shop = false;
         $this->go_user = false;
         $this->all_caoupane = false;
+        $this->category_all_page = false;
+        $this->subcateogry_all_page = false;
+        $this->shop_all_page = false;
+        $this->user_all_page = false;
         $this->show_navigation = true;
     }
     public function render()
@@ -70,6 +92,28 @@ class Create extends Component
     {
         $this->pageReset();
         $this->go_subCategory = true;
+    }
+
+
+    public function go_all_category()
+    {
+        $this->pageReset();
+        $this->category_all_page = true;
+    }
+    public function go_all_shop()
+    {
+        $this->pageReset();
+        $this->shop_all_page = true;
+    }
+    public function go_all_user()
+    {
+        $this->pageReset();
+        $this->user_all_page = true;
+    }
+    public function go_all_subCategory()
+    {
+        $this->pageReset();
+        $this->subcateogry_all_page = true;
     }
 
     public function coupaneCreate()

@@ -11,6 +11,7 @@
                             <span>
 
                                 All Pending Order
+                              
                             </span>
 
                             <span class="badge badge-danger headerBadge1">
@@ -119,10 +120,11 @@
                                 
 
                                 </tr>
+                                {{-- {{ dd($orders) }} --}}
                                 @foreach($orders->chunk(10) as $singleorder)
 
                                 @foreach ($singleorder as $order)
-
+                                {{-- {{ dd($order) }} --}}
                                 <tr>
                                     <td>{{ $loop->index + 1 }}</td>
 
@@ -146,7 +148,7 @@
                                     <td>{{ $order->created_at->diffForHumans()}}</td>
 
                                     <td><button class="btn btn-primary" 
-                                        wire:click="Go_Single_order_details_page({{  $order->details }} ,{{ $order->code }})"
+                                        wire:click="Go_Single_order_details_page({{  $order->id }} ,{{ $order->code }})"
                                            >Details</button></td>
 
 
@@ -171,7 +173,8 @@
     @elseif($single_product_page == true)
    @livewire('admin.ordersection.single-product' , [
      'product' => $product_details_variable,
-     'variation' => $product_variation_variable
+     'variation' => $product_variation_variable,
+     'component_identy_variable' => $variable_for_back_to_index_page
     ])
     @endif
 </div>

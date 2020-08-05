@@ -28,21 +28,37 @@ class Shop extends Model
 
     public function getSlugAttribute()
     {
-        return Str::slug($this->category->name . ' ' . $this->name, '-');
+        return Str::slug($this->category->name .
+            ' ' .
+            $this->name, '-');
+    }
+    public function getProductCountAttribute() // product_count
+    {
+        return $this->products->count();
+    }
+
+    public function processDelever()
+    {
+        return $this->hasOne(Shopprocessdelever::class);
     }
 
     public function subcategorys()
     {
-        return $this->hasMany(Subcategory::class)->where('status', true);
+        return $this->hasMany(Subcategory::class)
+            ->where('status', true);
     }
     public function products()
     {
-        return $this->hasMany(Product::class)->where('status', true);
+        return $this->hasMany(Product::class)
+            ->where('status', true);
     }
 
     public function stocks()
     {
-        return $this->hasManyThrough(Stock::class, Product::class);
+        return $this->hasManyThrough(
+            Stock::class,
+            Product::class
+        );
     }
 
     // function delete()

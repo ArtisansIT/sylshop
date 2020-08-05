@@ -1,4 +1,6 @@
 <div>
+
+    {{-- {{ dd($shops) }} --}}
  <div class="mobile-menu-container mobile-menu-light">
     <div class="mobile-menu-wrapper">
         <span class="mobile-menu-close"><i class="icon-close"></i></span>
@@ -22,7 +24,7 @@
             <div class="tab-pane fade show active" id="mobile-menu-tab" role="tabpanel" aria-labelledby="mobile-menu-link">
                 <nav class="mobile-nav">
                     <ul class="mobile-menu">
-                        <li class="active">
+                        {{-- <li class="active">
                             <a href="index.html">Home</a>
 
                             <ul>
@@ -81,19 +83,22 @@
                                 <li><a href="product-fullwidth.html">Full Width</a></li>
                                 <li><a href="product-masonry.html">Masonry Sticky Info</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                         <li>
-                            <a >Category</a>
+                            <a >All Items</a>
                             
                             <ul>
                                 @foreach ($categorys as $category)
                                 <li>
-                                    <a href="about.html">{{ $category->name }}</a>
+                                  
+                                      <a href="{{ route('front.category',[$category->id , $category->slug]) }}">{{ $category->name }}</a>
 
                                     <ul>
                                         @foreach ($category->subcategorys as $subcategory)
                                             
-                                        <li><a href="about.html">{{ $subcategory->status }}</a></li>
+                                        <li>
+                                           <a href="{{ route('front.single.subcategory',[$subcategory->id,$subcategory->slug]) }}">{{ $subcategory->name }}</a>
+                                        </li>
                                         {{-- <li><a href="about-2.html">About 02</a></li> --}}
                                         @endforeach
                                     </ul>
@@ -104,6 +109,30 @@
                             </ul>
                         </li>
                         <li>
+                            <a >Shop</a>
+                            
+                            <ul>
+                                @foreach ($shops as $shop)
+                                <li>
+                                  
+                                        <a href="{{ route('front.single.shop',[$shop->id , $shop->slug]) }}">{{ $shop->name }}</a>
+
+                                    <ul>
+                                        @foreach ($shop->subcategorys as $subcategory)
+                                            
+                                        <li>
+                                           <a href="{{ route('front.single.subcategory',[$subcategory->id,$subcategory->slug]) }}">{{ $subcategory->name }}</a>
+                                        </li>
+                                        {{-- <li><a href="about-2.html">About 02</a></li> --}}
+                                        @endforeach
+                                    </ul>
+                                </li>
+                                @endforeach
+                               
+                                
+                            </ul>
+                        </li>
+                        {{-- <li>
                             <a href="blog.html">Blog</a>
 
                             <ul>
@@ -162,7 +191,7 @@
                                 <li><a href="elements-cta.html">Call to Action</a></li>
                                 <li><a href="elements-icon-boxes.html">Icon Boxes</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                     </ul>
                 </nav><!-- End .mobile-nav -->
             </div><!-- .End .tab-pane -->

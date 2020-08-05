@@ -2,7 +2,7 @@
     <header class="header">
         <div class="header-top">
             <div class="container">
-                <div class="header-left">
+                {{-- <div class="header-left">
                     <div class="header-dropdown">
                         <a href="#">Usd</a>
                         <div class="header-menu">
@@ -23,18 +23,18 @@
                             </ul>
                         </div><!-- End .header-menu -->
                     </div><!-- End .header-dropdown -->
-                </div><!-- End .header-left -->
+                </div><!-- End .header-left --> --}}
 
                 <div class="header-right">
                     <ul class="top-menu">
                         <li>
-                            <a href="#">Links</a>
+                            <a href="#">Log in</a>
                             <ul>
-                                <li><a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a></li>
+                                {{-- <li><a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a></li>
                                 <li><a href="wishlist.html"><i class="icon-heart-o"></i>Wishlist <span>(3)</span></a>
                                 </li>
-                                {{-- <li><a href="about.html">About Us</a></li> --}}
-                                <li><a href="contact.html">Contact Us</a></li>
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="contact.html">Contact Us</a></li> --}}
                                 @auth
                                     @if(auth()->user()->role_id == 2)
                                     <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
@@ -170,7 +170,7 @@
                                 </div><!-- End .megamenu megamenu-md -->
                             </li>
 
-                            <li>
+                            {{-- <li>
                                 <a href="#" class="sf-with-ul">Pages</a>
 
                                 <ul>
@@ -256,13 +256,13 @@
                                     <li><a href="elements-cta.html">Call to Action</a></li>
                                     <li><a href="elements-icon-boxes.html">Icon Boxes</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
                         </ul><!-- End .menu -->
                     </nav><!-- End .main-nav -->
                 </div><!-- End .header-left -->
 
                 <div class="header-right">
-                    <div class="header-search">
+                    {{-- <div class="header-search">
                         <a href="#" class="search-toggle" role="button" title="Search"><i class="icon-search"></i></a>
                         <form action="#" method="get">
                             <div class="header-search-wrapper">
@@ -271,15 +271,15 @@
                                     required>
                             </div><!-- End .header-search-wrapper -->
                         </form>
-                    </div><!-- End .header-search -->
+                    </div><!-- End .header-search --> --}}
                     <div class="dropdown compare-dropdown">
-                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        {{-- <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false" data-display="static" title="Compare Products"
                             aria-label="Compare Products">
                             <i class="icon-random"></i>
-                        </a>
+                        </a> --}}
 
-                        <div class="dropdown-menu dropdown-menu-right">
+                        {{-- <div class="dropdown-menu dropdown-menu-right">
                             <ul class="compare-products">
                                 <li class="compare-product">
                                     <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
@@ -296,7 +296,7 @@
                                 <a href="#" class="btn btn-outline-primary-2"><span>Compare</span><i
                                         class="icon-long-arrow-right"></i></a>
                             </div>
-                        </div><!-- End .dropdown-menu -->
+                        </div><!-- End .dropdown-menu --> --}}
                     </div><!-- End .compare-dropdown -->
 
                     <div class="dropdown cart-dropdown">

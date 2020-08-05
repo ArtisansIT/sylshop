@@ -5,6 +5,7 @@ namespace App;
 use App\Admin\Shop;
 use App\Admin\Order;
 use App\Admin\Coupane;
+use App\Admin\like;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -51,6 +52,10 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::make($value);
     }
 
+    public function like()
+    {
+        return $this->hasMany(like::class);
+    }
     public function coupanes()
     {
         return $this->hasMany(Coupane::class);

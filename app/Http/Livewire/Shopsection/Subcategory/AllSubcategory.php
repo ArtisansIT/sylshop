@@ -17,21 +17,18 @@ class AllSubcategory extends Component
     }
     public function render()
     {
-        return view(
-            'livewire.shopsection.subcategory.all-subcategory',
-            [
-                'data' => $this->search === null ?
-                    Subcategory::where([
-                        ['deleted_at', null],
-                        ['status', true],
-                    ])->get() :
-                    Subcategory::where([
-                        ['name', 'like', '%' . $this->search . '%'],
-                        ['deleted_at', null],
-                        ['status', true],
-                    ])->get()
-            ]
-        );
+        return view('livewire.shopsection.subcategory.all-subcategory', [
+            'data' => $this->search === null ?
+                Subcategory::where([
+                    ['deleted_at', null],
+                    ['status', true],
+                ])->get() :
+                Subcategory::where([
+                    ['name', 'like', '%' . $this->search . '%'],
+                    ['deleted_at', null],
+                    ['status', true],
+                ])->get()
+        ]);
     }
 
     public function edit($subcategory)

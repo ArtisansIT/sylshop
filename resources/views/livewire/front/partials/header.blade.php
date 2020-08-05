@@ -76,14 +76,15 @@
             <div class="header-right">
                 <div class="header-dropdown-link">
                    
-                    <a href="wishlist.html" class="wishlist-link">
+                    {{-- <a href="wishlist.html" class="wishlist-link">
                         <i class="icon-heart-o"></i>
                         <span class="wishlist-count">3</span>
                         <span class="wishlist-txt">Wishlist</span>
-                    </a>
+                    </a> --}}
 
                     <div class="dropdown cart-dropdown">
-                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown"
+                         aria-haspopup="true" aria-expanded="false" data-display="static">
                             <i class="icon-shopping-cart"></i>
                             {{-- <span class="cart-count">{{ $cartTotal }}</span> --}}
                             @livewire('front.partials.cart-size')
@@ -101,7 +102,8 @@
         <div class="container">
             <div class="header-left">
                 <div class="dropdown category-dropdown show is-on" data-visible="true">
-                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-display="static" title="Browse Categories">
+                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown"
+                     aria-haspopup="true" aria-expanded="true" data-display="static" title="Browse Categories">
                         Browse Categories
                     </a>
 
@@ -112,7 +114,9 @@
                                 @foreach ($categorys as $category)
                                     
                                 <li class="megamenu-container">
-                                    <a class="sf-with-ul" href="{{ route('front.category',[$category->id,$category->slug]) }}">{{ $category->name }}</a>
+                                    <a class="sf-with-ul" 
+                                    href="{{ route('front.category',[$category->id,$category->slug]) }}">
+                                    {{ $category->name }}</a>
 
                                     <div class="megamenu">
                                         <div class="row no-gutters">

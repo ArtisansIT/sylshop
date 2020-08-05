@@ -19,6 +19,8 @@ class CreateShopsTable extends Migration
             $table->string('licence')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->string('address');
+            $table->integer('procecing_rate');
+            $table->integer('delevered_rate');
             $table->string('boss_name');
             $table->string('phone');
             $table->string('email')->nullable();

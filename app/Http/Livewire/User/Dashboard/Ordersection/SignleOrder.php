@@ -12,6 +12,7 @@ class SignleOrder extends Component
     public function mount($orders, $current_page_status)
     {
         $this->orders = $orders;
+
         // dd($this->orders);
         $this->current_page_status = $current_page_status;
         // dd($this->orders);

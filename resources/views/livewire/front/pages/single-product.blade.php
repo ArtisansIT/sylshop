@@ -1,5 +1,4 @@
 <div>
-
     <livewire:front.partials.header-two />
 
     <main class="main">
@@ -9,29 +8,7 @@
             <div class="container">
                 <div class="product-details-top">
                     <div class="bg-light pb-5 mb-4">
-                        <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
-                            <div class="container d-flex align-items-center">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="breadcrumb-item"><a href="#">Products</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Gallery</li>
-                                </ol>
-
-                                <nav class="product-pager ml-auto" aria-label="Product">
-                                    <a class="product-pager-link product-pager-prev" href="#" aria-label="Previous"
-                                        tabindex="-1">
-                                        <i class="icon-angle-left"></i>
-                                        <span>Prev</span>
-                                    </a>
-
-                                    <a class="product-pager-link product-pager-next" href="#" aria-label="Next"
-                                        tabindex="-1">
-                                        <span>Next</span>
-                                        <i class="icon-angle-right"></i>
-                                    </a>
-                                </nav><!-- End .pager-nav -->
-                            </div><!-- End .container -->
-                        </nav><!-- End .breadcrumb-nav -->
+                       
                         <div class="container">
                             <div class="product-gallery-carousel owl-carousel owl-full owl-nav-dark">
                                 @foreach ($product->image as $data)
@@ -50,19 +27,38 @@
 
                     @livewire('front.partials.cart-row')
 
-
+                    
                     <div class="mb-5"></div>
                     <div class="product-details product-details-centered product-details-separator">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h1 class="product-title">{{ $product->name }}</h1><!-- End .product-title -->
+                                    <h1 class="product-title">
+                                        <span>
+                                            {{ $product->name }}
+                                        </span>
+                                     
+                                    
+                                    </h1><!-- End .product-title -->
 
+                                  
+                                     
+
+                                        <h6>
+                                            <span> Code :</span>
+                                        <span class="new-price" >{{ $product->code }}</span>
+                                        </h6>
+
+                                     
+                                      
+                                  
+                                    {{-- {{ dd($product->comments) }} --}}
                                     <div class="ratings-container">
                                         <div class="ratings">
-                                            <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                                            <div class="ratings-val" style="width: {{ $product->max_rating }}0%;"></div><!-- End .ratings-val -->
                                         </div><!-- End .ratings -->
-                                        <a class="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews
+                                        <a class="ratings-text" href="#product-review-link" id="review-link">
+                                            ( {{ $product->comment_count }} Reviews
                                             )</a>
                                     </div><!-- End .rating-container -->
 
@@ -83,20 +79,30 @@
                                                         class="form-control" value="1" min="1" max="100" step="1"
                                                         data-decimals="0" required>
                                                 </div><!-- End .product-details-quantity -->
-
+                                            @if ($product->stock_status == false)
                                                 <button wire:click="$emit('addProduct' , {{ $product->id }})"
                                                     class="btn-product btn-cart"><span>add
                                                         to
                                                         cart</span></button>
 
+                                            @else 
+
+                                            <h4 class="text-danger">Sold Out</h4>
+                                            @endif
 
 
                                             </div><!-- End .details-action-col -->
 
-                                           
-                                                 @livewire('front.partials.product-like', [
-                                    'product' => $product->id
+                                        
+                                            @auth
+
+                                     @livewire('front.partials.product-like', [
+                                    'product' => $product->id 
                                     ])
+                                                @else
+                                              <a class="ratings-text" href="#"
+                                     id="review-link">( {{$product->likes  }} Like )</a>
+                                            @endauth
                                              
                                         </div><!-- End .product-details-action -->
                                     </div>
@@ -108,13 +114,22 @@
                                         <div class="product-cat">
                                             <span>Category:</span>
                                             <a
-                                                href="{{ route('front.category',[$product->category->id,$product->category->slug]) }}">{{$product->category->name  }}</a>,
-                                            <a href="#">{{$product->subcategory->name  }}</a>
-                                            <a href="#">{{$product->shop->name  }}</a>,
+                                                href="{{ route('front.category',[$product->category->id,$product->category->slug]) }}">
+                                                {{$product->category->name }}</a>,
+                                            <a href="{{  route('front.single.subcategory',
+                                    [$product->subcategory->id,$product->subcategory->slug]) }}">
+                                    {{$product->subcategory->name  }}</a>
+                                           
+                                        </div><!-- End .product-cat -->
+                                        <div class="product-cat">
+                                            <span class="new-pric">Shop :</span>
+                                          
+                                            <a href="{{ route('front.single.shop',[$product->shop->id , $product->shop->slug]) }}">
+                                                {{$product->shop->name  }}</a>,
                                         </div><!-- End .product-cat -->
 
                                         <div class="social-icons social-icons-sm">
-                                            <span class="social-label">Share:</span>
+                                            <span class="social-label">Chat:</span>
                                             <a href="" class="social-icon" title="Facebook" target="_blank"><i
                                                     class="icon-facebook-f"></i></a>
                                             <a href="" class="social-icon" title="Twitter" target="_blank"><i
@@ -155,7 +170,8 @@
                             <div class="product-desc-content">
                                 <h3>Product Information</h3>
                                 <p>
-                                    {{$product->short_description  }}
+                                    {{-- {{$product->long_description  }} --}}
+                                     {!! nl2br(e($product->long_description)) !!}
                                 </p>
 
                             </div><!-- End .product-desc-content -->
@@ -166,7 +182,8 @@
                                 <h3>Information</h3>
 
                                 <p>
-                                    {{$product->long_description  }}
+                                     {{-- {{$product->short_description  }} --}}
+                                      {!! nl2br(e($product->short_description)) !!}
                                 </p>
                             </div><!-- End .product-desc-content -->
                         </div><!-- .End .tab-pane -->
@@ -175,7 +192,9 @@
                             <div class="product-desc-content">
                                 <h3>Delivery & returns</h3>
                                 <p>
-                                    {{$product->ship_return  }}
+                                    {{-- {{$product->ship_return  }} --}}
+                                     {!! nl2br(e($product->ship_return)) !!}
+                                    
                                 </p>
                             </div><!-- End .product-desc-content -->
                         </div><!-- .End .tab-pane -->
@@ -193,12 +212,12 @@
                         <div class="col-6 col-md-4 col-lg-4 col-xl-3">
                             <div class="product product-7 text-center">
                                 <figure class="product-media">
-                                    <span class="product-label label-new">New</span>
+                                    {{-- <span class="product-label label-new">New</span> --}}
                                     <a href="{{ route('front.product',[$data->id , $data->slug]) }}">
                                         <img src="{{ asset('images/'.$data->image->first()->url) }}" alt="Product image"
                                             class="product-image">
                                     </a>
-
+{{-- 
                                     <div class="product-action-vertical">
                                         <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to
                                                 wishlist</span></a>
@@ -206,24 +225,41 @@
                                             title="Quick view"><span>Quick view</span></a>
                                         <a href="#" class="btn-product-icon btn-compare"
                                             title="Compare"><span>Compare</span></a>
-                                    </div><!-- End .product-action-vertical -->
+                                    </div> --}}
+                                    
+                                    
+                                    <!-- End .product-action-vertical -->
 
                                     <div class="product-action">
+                                          @if ($data->stock_status == false)
                                         <p wire:click="$emit('addFromSameType',{{ $data->id }})"
                                             class="btn-product product addToCart-pointer btn-cart"><span>add to cart</span></p>
 
+
+                                            
+
+                                            @else 
+
+                                            <p class="btn-product product addToCart-pointer"><span>Sold Out</span></p>
+                                            @endif
                                              
                                     </div><!-- End .product-action -->
                                 </figure><!-- End .product-media -->
 
                                 <div class="product-body">
                                     <div class="product-cat">
-                                        <a
-                                            href="{{ route('front.category',[$data->category->id,$data->category->slug]) }}">{{$data->category->name  }}</a>
+                                       <a href="{{ route('front.category', $product->category_link) }}">
+
+                                                    {{  $product->category_name }}</a>
                                     </div><!-- End .product-cat -->
                                     <h3 class="product-title"><a
                                             href="{{ route('front.product',[$data->id , $data->slug]) }}">{{ $data->name }}
                                         </a></h3><!-- End .product-title -->
+
+                                         <h6>
+                                                    <span> Code :</span>
+                                                <span class="new-price" >{{ $product->code }}</span>
+                                                </h6>
                                     <div class="product-price">
                                         @if (empty($data->offer_price))
 
@@ -232,17 +268,19 @@
                                         @else
 
                                         <span class="new-price">TK{{ $data->offer_price }}</span>
-                                        <span class="old-price">Was TK{{ $data->main_price  }}</span>
+                                        <span class="old-price"> TK{{ $data->main_price  }}</span>
                                         @endif
                                     </div><!-- End .product-price -->
                                     <div class="ratings-container">
                                         <div class="ratings">
-                                            <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
+                                            <div class="ratings-val" style="width:  {{ $data->max_rating }}%;"></div><!-- End .ratings-val -->
                                         </div><!-- End .ratings -->
-                                        <span class="ratings-text">( 2 Reviews )</span>
+
+                                        
+                                        <span class="ratings-text">( {{ $data->comment_count }} Reviews )</span>
                                     </div><!-- End .rating-container -->
 
-                                    <div class="product-nav product-nav-thumbs">
+                                    {{-- <div class="product-nav product-nav-thumbs">
                                         @foreach ($data->image as $image)
 
                                         <a href="#">
@@ -250,7 +288,8 @@
                                         </a>
                                         @endforeach
 
-                                    </div><!-- End .product-nav -->
+                                    </div> --}}
+                                    <!-- End .product-nav -->
                                 </div><!-- End .product-body -->
                             </div><!-- End .product -->
                         </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->

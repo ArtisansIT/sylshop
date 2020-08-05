@@ -38,7 +38,7 @@
                                 @error('shop')<code>{{ $message }}</code> @enderror</label>
                             <select wire:model="shop" wire:change="shopChange" class="form-control">
                                 <option value=""> select</option>
-                                @foreach($this->shops as $shop)
+                                @foreach($shops as $shop)
                                 <option value="{{ $shop->id }}"> {{ $shop->name }}</option>
 
                                 @endforeach
@@ -51,7 +51,7 @@
                                 @error('subcategory')<code>{{ $message }}</code> @enderror</label>
                             <select wire:model="subcategory" class="form-control">
                                 <option value=""> select</option>
-                                @foreach($this->subcategorys as $subcategory)
+                                @foreach($subcategorys as $subcategory)
                                 <option value="{{ $subcategory->id }}"> {{ $subcategory->name }}</option>
 
                                 @endforeach

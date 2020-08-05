@@ -61,7 +61,7 @@
                                                 class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td>{{ isset($product->name) ? $product->name : '' }}</td>
+                                    <td>{{ isset($product->name) ? $product->name : '' }}{{ $product->stock_status }}</td>
 
                                     <td>{{ isset($product->category->name) ? $product->category->name: '' }}</td>
                                     <td>{{ isset($product->shop->name) ? $product->shop->name : '' }}</td>
@@ -100,6 +100,15 @@
                                     <td>
                                         <div class="btn-group mb-3 btn-group-sm" role="group"
                                             aria-label="Basic example">
+                                            @if ($product->stock_status == true)
+                                                <p class="text-danger">Out of Stock</p>
+
+                                            @else 
+
+                                            <button type="button" class="btn btn-danger m-1"
+                                                 wire:click="outOfStock({{ $product->id }})">Out of Stock
+                                            </button>
+                                            @endif
                                             <button type="button" class="btn btn-dark m-1"
                                                  wire:click="allVariation({{ $product->id }})">Variation
                                             </button>

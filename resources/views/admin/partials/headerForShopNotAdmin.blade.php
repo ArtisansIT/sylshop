@@ -65,9 +65,13 @@
             <li class="dropdown active">
               {{-- <a href="{{ route('user.all_orders') }}" class="nav-link"><i data-feather="monitor"></i><span>All Orders</span></a> --}}
               <a href="{{ route('user.order_processing') }}" class="nav-link"><i data-feather="monitor"></i><span>shop dashboard</span></a>
-              <a href="{{ route('shop.all_product') }}" class="nav-link"><i data-feather="monitor"></i><span>all shop</span></a>
+              <a href="{{ route('shop.shop_order_processing') }}" class="nav-link"><i data-feather="monitor"></i><span>Order Proceing</span></a>
+              {{-- <a href="{{ route('shop.all_product') }}" class="nav-link"><i data-feather="monitor"></i><span>all shop</span></a> --}}
+              <a href="{{ route('shop.update_banner_image') }}" class="nav-link"><i data-feather="monitor"></i><span>Image and Banner</span></a>
               <a href="{{ route('shop.subcategory') }}" class="nav-link"><i data-feather="monitor"></i><span>subcategory</span></a>
               <a href="{{ route('shop.product_section') }}" class="nav-link"><i data-feather="monitor"></i><span>Products</span></a>
+              <a href="{{ route('shop.Myaccount_index') }}" class="nav-link"><i data-feather="monitor"></i><span>MY-Account</span></a>
+              <a href="{{ route('shop.My_coupanes_create') }}" class="nav-link"><i data-feather="monitor"></i><span>Coupanes</span></a>
              
             </li>
             <li class="dropdown">

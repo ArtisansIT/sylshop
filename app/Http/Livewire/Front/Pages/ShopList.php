@@ -18,7 +18,7 @@ class ShopList extends Component
     {
         $this->shops = Shop::with('image', 'category')
             ->where('status', true)
-            ->get();
+            ->inRandomOrder()->get();
     }
     public function render()
     {

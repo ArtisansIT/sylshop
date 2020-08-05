@@ -16,12 +16,12 @@ class Index extends Component
     {
         $this->firstCategory = Category::first();
         $this->categorys = Category::with('image', 'products', 'products.image', 'products.shop')
-            ->where('popular', true)->get();
+            ->where('popular', true)->inRandomOrder()->get();
 
         $this->dealCategory = Category::with(['products' => function ($query) {
             $query->whereHas('adons', function (Builder $query) {
                 $query->where('today_offer', true);
-            })->get();
+            })->inRandomOrder()->get();
         }])->get();
     }
 

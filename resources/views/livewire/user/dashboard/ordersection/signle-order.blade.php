@@ -9,7 +9,7 @@
                                Current Page:
                             </span>
                             <span class="text-danger">
-                              {{ $current_page_status }}
+                              {{ $current_page_status == 'check' ? 'Confirmed' : $current_page_status }}
                             </span>
 
 

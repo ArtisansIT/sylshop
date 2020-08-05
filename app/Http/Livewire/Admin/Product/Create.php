@@ -20,6 +20,7 @@ class Create extends Component
     public $goto_index_page;
     public $goto_inactive_page;
     public $goto_edit_page;
+    public $out_of_stock_page;
     public $img_upload_page;
     public $stock_page;
     public $un_complete_product_page;
@@ -91,6 +92,7 @@ class Create extends Component
     {
         $this->goto_create_page = true;
         $this->goto_index_page = false;
+        $this->out_of_stock_page = false;
         $this->goto_inactive_page = false;
         $this->goto_edit_page = false;
         $this->img_upload_page = false;
@@ -112,6 +114,7 @@ class Create extends Component
     {
         $this->goto_create_page = false;
         $this->goto_index_page = false;
+        $this->out_of_stock_page = false;
         $this->goto_inactive_page = false;
         $this->goto_edit_page = false;
         $this->img_upload_page = false;
@@ -367,6 +370,11 @@ class Create extends Component
     {
         $this->reset();
         $this->goto_create_page = true;
+    }
+    public function out_of_stock()
+    {
+        $this->reset();
+        $this->out_of_stock_page = true;
     }
 
     public function edit_product($product)

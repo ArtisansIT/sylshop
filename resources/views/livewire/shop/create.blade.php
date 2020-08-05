@@ -89,11 +89,51 @@
 
 
                                 <label>
-                                    <code>*</code><strong>Shop Fb Groups Link </strong>
+                                    <code>*</code><strong>Shop Facebook Link </strong>
                                     @error('link')<code>{{ $message }}</code>
                                     @enderror
                                 </label>
                                 <input wire:model="link" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="frist_name">
+                                    <code>*</code><strong>Processing Rate</strong>
+                                    @error('processing_rate')<code>{{ $message }}</code>
+                                    @enderror
+                                </label>
+                                <input wire:model="processing_rate" type="number" class="form-control" autofocus>
+                            </div>
+                            <div class="form-group col-6">
+
+
+                                <label>
+                                    <code>*</code><strong>Delevered Rate </strong>
+                                    @error('delevered_rate')<code>{{ $message }}</code>
+                                    @enderror
+                                </label>
+                                <input wire:model="delevered_rate" type="number" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="frist_name">
+                                    <code>*</code><strong>Processing Commision Rate</strong>
+                                    @error('processing_commision_rate')<code>{{ $message }}</code>
+                                    @enderror
+                                </label>
+                                <input wire:model="processing_commision_rate" type="number" class="form-control" autofocus>
+                            </div>
+                            <div class="form-group col-6">
+
+
+                                <label>
+                                    <code>*</code><strong>Delevered Commision Rate </strong>
+                                    @error('delevered_commision_rate')<code>{{ $message }}</code>
+                                    @enderror
+                                </label>
+                                <input wire:model="delevered_commision_rate" type="number" class="form-control">
                             </div>
                         </div>
                         <hr>
@@ -161,7 +201,7 @@
                         </div>
                         <div class="form-group col-12">
                             <label>
-                                <code>*</code><strong>Your Account Bank Name </strong>
+                                <code>*</code><strong> Bank Name </strong>
                                 @error('bank_name')<code>{{ $message }}</code>
                                 @enderror
                             </label>
@@ -188,8 +228,6 @@
                 @include('livewire.shop.image-upload')
                 @elseif($img_update_page == true)
                 @include('livewire.shop.image-update')
-                @elseif($goto_edit_page == true)
-                @include('livewire.shop.edit-a-shop')
                 @elseif($all_shop_page == true)
                 @livewire('shop.view-all-shop')
                 @elseif($inactive_all_shop_page == true)

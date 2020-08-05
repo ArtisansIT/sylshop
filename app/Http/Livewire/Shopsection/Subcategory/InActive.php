@@ -15,15 +15,12 @@ class InActive extends Component
     }
     public function render()
     {
-        return view(
-            'livewire.shopsection.subcategory.in-active',
-            [
+        return view('livewire.shopsection.subcategory.in-active', [
 
-                'subcategories' => $this->search === null ?
-                    Subcategory::where('status', true)->onlyTrashed()->get() :
-                    Subcategory::where('name', 'like', '%' . $this->search . '%')->onlyTrashed()->get()
-            ]
-        );
+            'subcategories' => $this->search === null ?
+                Subcategory::where('status', true)->onlyTrashed()->get() :
+                Subcategory::where('name', 'like', '%' . $this->search . '%')->onlyTrashed()->get()
+        ]);
     }
 
     public function restore($subcategory)

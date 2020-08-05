@@ -10,9 +10,17 @@ class SingleSubcategory extends Component
 
     public $subcategory;
 
-    public function mount(Subcategory $subcategory)
+    public function mount($subcategory)
     {
-        $this->subcategory = $subcategory;
+
+        $this->subcategory  = Subcategory::with(
+            [
+                'products' => function ($q) {
+                    $q->inRandomOrder()->get();
+                },
+                'products.image'
+            ],
+        )->findOrFail($subcategory);
     }
     public function render()
     {

@@ -18,6 +18,7 @@ class CreatePAdonsTable extends Migration
             $table->unsignedBigInteger('product_id')->index();
             $table->unsignedBigInteger('view')->default(0)->index();
             $table->boolean('today_offer')->default(false)->index();
+            $table->boolean('outofstock')->default(false)->index();
             $table->foreign('product_id')->references('id')->on('products')
                 ->cascadeOnDelete();
             $table->timestamps();

@@ -56,6 +56,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'layout' => 'admin.layouts.
     Route::livewire('coupane-with-user', 'admin.userwithcoupane.users')->name('coupane_with_user');
     Route::livewire('all-order', 'admin.order.all-order')->name('all_order');
     Route::livewire('order_section', 'admin.ordersection.index')->name('order_section');
+    Route::livewire('order-processing', 'admin.order-procesing.shop-list')->name('order_processing');
+    Route::livewire('order-delevered', 'admin.order-delever.shop-list')->name('order_delevered');
+    Route::livewire('requested-product', 'admin.productrequest.requested-product')->name('requested_product');
+
+
+    Route::get('single-order-details-print/{id}', 'Admin\Product\prosuctController@printDocument')
+        ->name('single_order_item_print');
+    Route::get('shop-processing-money-print/{id}', 'Admin\Product\prosuctController@shop_processing_invoice')
+        ->name('shop_processing_invoice');
+    Route::get('shop-delevered-money-print/{id}', 'Admin\Product\prosuctController@shop_delevered_invoice')
+        ->name('shop_delevered_invoice');
 });
 
 
@@ -79,6 +90,10 @@ Route::group(['layout' => 'admin.layouts.app', 'as' => 'shop.', 'section' => 'ma
     // Route::livewire('/shop/all-product', 'shopsection.product.all-product')->name('all_product');
     Route::livewire('/shop/subcategory', 'shopsection.subcategory.create')->name('subcategory');
     Route::livewire('/shop/product-section', 'shopsection.product.create')->name('product_section');
+    Route::livewire('/shop-order-processing', 'shopsection.orderprocessing.processing-all')->name('shop_order_processing');
+    Route::livewire('/My-account', 'shopsection.myaccount.index')->name('Myaccount_index');
+    Route::livewire('/My-coupanes', 'shopsection.coupane.create')->name('My_coupanes_create');
+    Route::livewire('/update-images', 'shopsection.imagesection.index')->name('update_banner_image');
 });
 
 

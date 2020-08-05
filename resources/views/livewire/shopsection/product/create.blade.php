@@ -19,8 +19,8 @@
 
                         @if ($pending_all_product_page == false)
 
-                        <a href="#" wire:click="pending_all_product_page" class="btn mr-2 btn-warning">
-                            View All inactive
+                        <a href="#" wire:click="pending_all_product_page" class="btn mr-2 btn-danger">
+                           In-Active 
                         </a>
                         @endif
 
@@ -147,8 +147,10 @@
                 @livewire('shopsection.product.all-product')
                 @elseif($pending_all_product_page == true)
                 @livewire('shopsection.product.inactiveproduct')
-
-
+                @elseif($goto_single_product_page == true)
+                @livewire('shopsection.product.single-product' ,[
+                    'product' =>$single_product_id
+                ])
                 @endif
             </div>
         </div>

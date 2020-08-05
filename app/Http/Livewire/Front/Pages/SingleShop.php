@@ -11,13 +11,33 @@ class SingleShop extends Component
     public $shop;
 
 
-    public function mount(Shop $shop)
+    public function mount($shop)
     {
-        $this->shop = $shop;
-        // dd($this->shop);
+        $this->shop = Shop::with(
+            [
+                'products' => function ($q) {
+                    $q->inRandomOrder()->get();
+                },
+                'subcategorys' => function ($q) {
+                    $q->inRandomOrder()->get();
+                },
+
+                'image',
+                'subcategorys.image',
+                'products.image'
+            ],
+        )->findOrFail($shop);
+        $this->viewCount();
     }
     public function render()
     {
         return view('livewire.front.pages.single-shop');
+    }
+
+    public function viewCount()
+    {
+        $this->shop->update([
+            'view' => $this->shop->view + 1
+        ]);
     }
 }

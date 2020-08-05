@@ -10,6 +10,10 @@
                         <div class="invoice-number">Order #{{ $order->code }}</div>
                     </div>
                     <hr>
+
+                 
+                        
+                  
                     <div class="row">
                         <div class="col-md-6">
                             <address>
@@ -51,6 +55,7 @@
                             </address>
                         </div>
                     </div>
+                    
                 </div>
             </div>
             <div class="row mt-4">
@@ -102,7 +107,9 @@
                         </table>
                     </div>
                     <div class="row mt-4">
+
                         <div class="col-lg-8">
+                          
                            <address>
                                 <strong>Payment Method:</strong><br>
                                 {{ $order->payment->name }}<br>
@@ -116,12 +123,14 @@
                                 <img src="assets/img/cards/mastercard.png" alt="mastercard">
                                 <img src="assets/img/cards/paypal.png" alt="paypal">
                             </div> --}}
+                           
                         </div>
                         <div class="col-lg-4 text-right">
                             <div class="invoice-detail-item">
                                 <div class="invoice-detail-name">Subtotal</div>
                                 <div class="invoice-detail-value">TK {{ $order->details->sum('total') }}</div>
                             </div>
+                           
                             <div class="invoice-detail-item">
                                 <div class="invoice-detail-name">Shipping</div>
                                 <div class="invoice-detail-value">TK {{ $order->shipping }}</div>
@@ -139,6 +148,7 @@
                                               $order->discount  }}
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>

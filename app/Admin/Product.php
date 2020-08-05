@@ -38,6 +38,55 @@ class Product extends Model
     {
         return $this->belongsTo(Shop::class);
     }
+    public function getShopNameAttribute() //shop_name
+    {
+        return $this->shop->name;
+    }
+    public function getStockStatusAttribute() // stock_status
+    {
+        if (
+            $this->stock->stock < 1 ||
+            $this->adons->outofstock == true
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function like()
+    {
+        return $this->hasMany(Like::class);
+    }
+    public function getCommentCountAttribute() // comment_count
+    {
+        return count($this->comments);
+    }
+
+    public function getCategoryNameAttribute() // category_name
+    {
+        return $this->category->name;
+    }
+    public function getLikesAttribute() // likes
+    {
+        return $this->like->count();
+    }
+    public function getCategoryLinkAttribute() // category_link
+    {
+        return [$this->category->id, $this->category->slug];
+    }
+    public function getViewAttribute() // comment_count
+    {
+        return $this->adons->view;
+    }
+    public function getMaxRatingAttribute() // max_rating
+    {
+        if (count($this->comments) > 0) {
+
+            return $this->comments->max('rating');
+        } else {
+            return 0;
+        }
+    }
 
 
     public function orderDetails()

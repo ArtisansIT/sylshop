@@ -75,4 +75,11 @@ class AllProduct extends Component
     {
         $this->emit('allVariation', $product);
     }
+    public function outOfStock($id)
+    {
+        $data = Product::with('adons')->findOrFail($id);
+        $data->adons->update([
+            'outofstock' => true,
+        ]);
+    }
 }

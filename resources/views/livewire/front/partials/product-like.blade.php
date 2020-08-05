@@ -1,13 +1,23 @@
 <div>
     <div class="ratings-container">
-        @if ($initial_status == true)
+        @if ($like_count_by_user < 1)
             
+            <p class="btn-product btn-wishlist addToCart-pointer"
+            wire:click="like"
+            title="Like">
+            <span>Like</span>
+            </p>
+        @else 
+
+
         <p class="btn-product btn-wishlist addToCart-pointer"
-        {{-- wire:click="like" --}}
-         title="Like"><span>Like</span></p>
+          wire:click="unlike"
+         title="Wishlist">
+         <span>Unlike</span>
+        </p>
         @endif
-        <a class="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews )</a>
-        <p class="btn-product btn-wishlist addToCart-pointer" title="Wishlist"><span>Unlike</span></p>
+        <a class="ratings-text" href="#product-review-link"
+         id="review-link">( {{ $like_count }} Like )</a>
     </div>
 
 

@@ -13,10 +13,17 @@
 
                     </h4>
                     <div class="card-header-form">
-
-                        <button wire:click="backTo_single_order" class="btn btn-danger btn-icon icon-left">
+                        @if ($component_identy_variable == 'shop_section_index_page')
+                            
+                        <button wire:click="$emit('backToMyaccountIndexFromSingle')" class="btn btn-danger btn-icon icon-left">
                             <i class="fas fa-times"></i> Back
                         </button>
+                        @elseif($component_identy_variable == 'admin_order_page')
+                            
+                        <button wire:click="$emit('backTo_single_order_from_product_page')" class="btn btn-danger btn-icon icon-left">
+                            <i class="fas fa-times"></i> Back
+                        </button>
+                        @endif
                     </div>
 
                 </div>
@@ -84,17 +91,20 @@
                             </tr>
                             <tr>
                                 <th scope="row">short description</th>
-                                <td>{{ $product->short_description }}</td>
+                        
+                                <td> {!! nl2br(e($product->short_description)) !!}</td>
 
                             </tr>
                             <tr>
                                 <th scope="row">Long description</th>
-                                <td>{{ $product->long_description }}</td>
+                              <td> {!! nl2br(e($product->long_description)) !!}</td>
+                                {{-- <td>{{ $product->long_description }}</td> --}}
 
                             </tr>
                             <tr>
                                 <th scope="row">ship_return</th>
-                                <td>{{ $product->ship_return }}</td>
+                                {{-- <td>{{ $product->ship_return }}</td> --}}
+                                      <td> {!! nl2br(e($product->ship_return)) !!}</td>
 
                             </tr>
                             <tr>

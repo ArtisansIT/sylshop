@@ -20,38 +20,31 @@
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <tr>
-                                    <th></th>
+                                  
                                     {{-- <th> Name</th> --}}
-                                    <th> Name ssss</th>
+                                    <th> Name</th>
+                                    <th>Code </th>
                                     <th>Category</th>
-                                    <th>Shop </th>
-                                    <th>Edit</th>
-                                    {{-- <th>Image Update</th> --}}
-                                    <th>Activation</th>
+                                    <th>Detsils</th>
+                                    <th>Create Time</th>
+                                 
                                 </tr>
                                 @foreach($products as $product)
 
                                 <tr>
-                                    <td class="p-0 text-center">
-                                        <div class="custom-checkbox custom-control">
-                                            <input type="checkbox" data-checkboxes="mygroup"
-                                                class="custom-control-input" id="checkbox-1">
-                                            <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-                                        </div>
-                                    </td>
+                                   
                                     <td>{{ isset($product->name) ? $product->name : '' }}</td>
+                                    <td>{{ isset($product->code) ? $product->code : '' }}</td>
 
-                                    <td>{{ isset($product->category->name) ?$product->category->name : ''  }}</td>
-                                    <td>{{ isset($product->shop->name) ? $product->shop->name : ''  }}</td>
-                                    <td><button class="btn btn-primary"
-                                         onclick="confirm('Do you want To Restore') || event.stopImmediatePropagation()"
-                                            wire:click="restore_product({{ $product->id }})">Restore</button></td>
+                                    <td>{{ isset($product->subcategory->name) ?$product->subcategory->name : ''  }}</td>
+                                   
+                                   
                                     <td><a href="#"
-                                            onclick="confirm('Do you want To delete This') || event.stopImmediatePropagation()"
-                                            wire:click="forceDelete_product({{ $product->id }})"
-                                            class="btn btn-primary">Force Delete</a></td>
+                    
+                                            wire:click="$emit('viewProduct' , {{ $product->id  }})"
+                                            class="btn btn-primary">Details</a></td>
 
-                                    {{-- <td><a href="#" class="btn btn-primary">In active</a></td> --}}
+                                    <td> {{ $product->created_at->diffForHumans() }}</td>
                                 </tr>
 
                                 @endforeach

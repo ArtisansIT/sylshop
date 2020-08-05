@@ -18,6 +18,7 @@ class Create extends Component
     use WithFileUploads;
 
     public $goto_create_page;
+    public $goto_single_product_page;
     public $goto_index_page;
     public $goto_inactive_page;
     public $goto_edit_page;
@@ -61,6 +62,7 @@ class Create extends Component
 
 
     public $productId; // current created product id
+    public $single_product_id; // current created product id
     public $fullProduct; // current created product full 
 
     public $allimages;
@@ -95,6 +97,7 @@ class Create extends Component
     {
         $this->goto_create_page = true;
         $this->goto_index_page = false;
+        $this->goto_single_product_page = false;
         $this->goto_inactive_page = false;
         $this->goto_edit_page = false;
         $this->img_upload_page = false;
@@ -116,6 +119,7 @@ class Create extends Component
     public function resetAllPageValue()
     {
         $this->goto_create_page = false;
+        $this->goto_single_product_page = false;
         $this->goto_index_page = false;
         $this->goto_inactive_page = false;
         $this->goto_edit_page = false;
@@ -136,6 +140,8 @@ class Create extends Component
 
     protected $listeners = [
         'insert_stock',
+        'back' => 'all_product_page',
+        'viewProduct',
         'SSimageInsert',
         'SSedit_product',
         'SSsee_all_image' => 'see_all_image',
@@ -159,6 +165,13 @@ class Create extends Component
                 ['status', true],
             ])->get()
         ]);
+    }
+
+    public function viewProduct($product)
+    {
+        $this->single_product_id = $product;
+        $this->resetAllPageValue();
+        $this->goto_single_product_page = true;
     }
 
 

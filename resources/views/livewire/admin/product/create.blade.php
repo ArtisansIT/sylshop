@@ -25,6 +25,12 @@
                         </a>
                         @endif
 
+                        @if ($out_of_stock_page == false)
+
+                        <a href="#" wire:click="out_of_stock" class="btn mr-2 btn-info">
+                            Out OF Stock
+                        </a>
+                        @endif
                         @if ($pending_all_product_page == false)
 
                         <a href="#" wire:click="pending_all_product_page" class="btn mr-2 btn-warning">
@@ -197,6 +203,8 @@
             {{-- @elseif($pending_stock_page == true)
                 @include('livewire.admin.product.pending-stock') --}}
 
+            @elseif($out_of_stock_page == true)
+            @livewire('admin.product.out-of-stock')
             @elseif($un_complete_product_page == true)
             @livewire('admin.product.pending')
             @elseif($product_variation_create == true)

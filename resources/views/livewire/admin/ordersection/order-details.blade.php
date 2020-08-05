@@ -15,7 +15,7 @@
                         </h4>
                         <div class="card-header-form">
 
-                            <button wire:click="backToPage" class="btn btn-danger btn-icon icon-left">
+                            <button wire:click="$emit('return_back','$page_name_variable_singleOrder_page')" class="btn btn-danger btn-icon icon-left">
                                 <i class="fas fa-times"></i> Back
                             </button>
                         </div>
@@ -27,11 +27,16 @@
                                 <div class="alert alert-success">
                                     {{ session('message') }}
                                 </div>
+
+                                @elseif (session()->has('orderitem_find_in_procecing_table'))
+                                <div class="alert alert-danger">
+                                    {{ session('orderitem_find_in_procecing_table') }}
+                                </div>
                             @endif
                         </div>
 
                     </div>
-                    
+                 
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped">
@@ -41,6 +46,8 @@
                                     <th>Product Link</th>
                                     <th>Cancel</th>
                                     <th>Shop Cancel</th>
+                                    <th>Procecing</th>
+                                    <th>Delerved</th>
                                     <th>Order Date</th>
                                     <th>Product Price</th>
                                     <th>Quantity</th>
@@ -58,26 +65,55 @@
                                 
 
                                 </tr>
-
-                                @foreach ($singleorder as $order)
-                                
+                                {{-- {{ dd($allorderDetails) }} --}}
+                                @foreach ($allorderDetails as $order)
+                                {{-- {{ dd($order) }} --}}
                                 <tr>
                                     <td><button class="btn btn-primary"
-                                            wire:click="go_single_product({{  $order['product_id'] }} , {{ $order['variation_id'] }})">Product</button></td>
+                                            {{-- wire:click="go_single_product({{  $order['product_id'] }} , {{ $order['variation_id'] }})">Product</button></td> --}}
+                                            wire:click="$emit('go_single_product','{{ $order['product_id'] }}','{{ $order['variation_id'] }}')">Product</button></td>
 
                                  <td>
                                      <button
                                       onclick="confirm('Are you want To Cancel the order Item') || event.stopImmediatePropagation()"
-                                     wire:click="cancel({{$order['id']   }})" class="btn btn-danger">
-                                        Cancel
+                                     wire:click="cancel({{$order['id']}})" class="btn btn-danger">
+                                        Cancel 
                                      </button>
                                 </td>
                                 <td>
                                     <button wire:click="shopCancel({{ $order['id']  }})" class="btn btn-danger">
                                         <small> Shop Cancel</small>
-
+                                        
                                     </button>
-                                 </td>
+                                </td>
+                               <td>
+
+                                @if (!empty($order['process']) && $order['process']['processing_status'] == true)
+                                <small class="text-danger"> Procecing Complete</small>
+
+                                @elseif(empty($order['process']) || $order['process']['processing_status']  == false)
+
+                                <button wire:click="procecing({{ $order['id'] }})" class="btn btn-success">
+                                    <small> Procecing</small>
+
+                                </button>
+                                @endif
+                               </td>
+                               <td>
+
+                               @if (!empty($order['process'] && $order['process']['delevery_status'] == true))
+                                <small class="text-success"> Delevary Complete</small>
+
+                                @elseif(empty($order['process']) || $order['process']['delevery_status'] == false)
+
+
+                                <button wire:click="delevery({{ $order['id'] }})" class="btn btn-info">
+                                    <small> Delevered</small>
+
+                                </button>
+                                @endif
+                               </td>
+                                
 
 
                                     <td><small>{{ Carbon\Carbon::parse($order['created_at'])->toFormattedDateString()}}</small>
@@ -86,9 +122,14 @@
                                     --}}
                                     <td>Tk {{ $order['total'] }}</td>
                                     <td> {{ $order['quentity'] }}</td>
-                                    <td><button class="btn btn-primary"
-                                            wire:click="back"
-                                            >Print</button></td>
+                                    <td>
+                                        <a href="{{ route('admin.single_order_item_print',$order->id) }}"
+                                             class="btn btn-primary"
+                                            {{-- wire:click="printDocument({{$order->id }})" --}}
+                                            >Print
+                                        </a>
+                                        
+                                    </td>
                                     <td class="p-0 text-center">
                                         <div class="custom-checkbox custom-control">
                                             <input type="checkbox" data-checkboxes="mygroup"

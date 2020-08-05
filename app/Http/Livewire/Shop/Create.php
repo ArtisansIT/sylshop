@@ -38,6 +38,13 @@ class Create extends Component
     public $status;
 
 
+    public
+        $processing_rate,
+        $delevered_rate,
+        $processing_commision_rate,
+        $delevered_commision_rate;
+
+
     public $licence;
     public $boss_name;
     public $phone;
@@ -53,7 +60,6 @@ class Create extends Component
     public $currentShop;
 
     protected $listeners = [
-        'editShop',
         'bannerUpdate',
         'imageUpdate',
         'softDeleteShop',
@@ -99,9 +105,13 @@ class Create extends Component
             'category' => 'required',
             'address' => 'required',
             'link' => 'required',
-            'email' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
             // 'about' => 'required',
             'shipping' => 'required',
+            'processing_rate' => 'required',
+            'delevered_rate' => 'required',
+            'processing_commision_rate' => 'required',
+            'delevered_commision_rate' => 'required',
             'boss_name' => 'required',
             'phone' => 'required|numeric|regex:/(01)[0-9]{9}/|unique:users',
             'boss_address' => 'required',
@@ -119,6 +129,10 @@ class Create extends Component
             'shipping' => $this->shipping,
             'boss_name' => $this->boss_name,
             'phone' => $this->phone,
+            'procecing_rate' => $this->processing_rate,
+            'delevered_rate' => $this->delevered_rate,
+            'procecing_commision_rate' => $this->processing_commision_rate,
+            'delevered_commision_rate' => $this->delevered_commision_rate,
             'email' => $this->email,
             'boss_address' => $this->boss_address,
             'boss_nid' => $this->boss_nid,
@@ -158,42 +172,6 @@ class Create extends Component
         $this->reset();
         $this->resetAllPageValue();
         $this->goto_create_page = true;
-    }
-
-    public function editShop($category)
-    {
-        $this->categories = Category::all();
-        $record = Shop::findOrFail($category);
-
-        $this->shopid = $category;
-        $this->name = $record->name;
-        $this->category = $record->category_id;
-
-        $this->address = $record->address;
-        $this->link = $record->link;
-        $this->about = $record->about;
-        $this->shipping = $record->shipping;
-
-        $this->resetAllPageValue();
-        $this->goto_edit_page = true;
-    }
-    public function updateShop()
-    {
-        if ($this->shopid) {
-            $record = Shop::find($this->shopid);
-            $record->update([
-                'name' => $this->name,
-                'category_id' => $this->category,
-                'address' => $this->address,
-                'link' => $this->link,
-                'about' => $this->about,
-                'shipping' => $this->shipping,
-            ]);
-
-            $this->reset();
-            $this->resetAllPageValue();
-            $this->all_shop_page = true;
-        }
     }
 
     public function imageUpdate($category)

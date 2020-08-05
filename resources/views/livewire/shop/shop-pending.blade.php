@@ -41,7 +41,8 @@
 
 
                                     <td><button class="btn btn-primary"
-                                            wire:click="pendingImage({{ $shop->id }})">Pending Image</button></td>
+                                            {{-- wire:click="pendingImage({{ $shop->id }})">Pending Image</button></td> --}}
+                                            wire:click="$emit('pendingImage',{{ $shop->id }})">Pending Image</button></td>
 
                                 </tr>
 
